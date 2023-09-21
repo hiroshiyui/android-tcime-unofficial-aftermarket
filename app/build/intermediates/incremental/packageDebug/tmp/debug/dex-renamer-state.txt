@@ -1,0 +1,7 @@
+#Fri Sep 22 00:01:11 CST 2023
+base.0=/home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.1=/home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/build/intermediates/dex/debug/mergeProjectDexDebug/6/classes.dex
+path.0=0/classes.dex
+path.1=6/classes.dex
+renamed.0=classes.dex
+renamed.1=classes2.dex

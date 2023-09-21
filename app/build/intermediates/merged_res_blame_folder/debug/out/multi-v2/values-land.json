@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.googlecode.tcime.unofficial.app-mergeDebugResources-2:/values-land/values-land.xml",
+            "map": [
+                {
+                    "source": "/home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/res/values-land/dimens.xml",
+                    "from": {
+                        "startLines": "20,22,21",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "661,758,704",
+                        "endColumns": "42,47,53",
+                        "endOffsets": "699,801,753"
+                    },
+                    "to": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,98,146",
+                        "endColumns": "42,47,53",
+                        "endOffsets": "93,141,195"
+                    }
+                }
+            ]
+        }
+    ]
+}

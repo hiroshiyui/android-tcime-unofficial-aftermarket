@@ -1,0 +1,91 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:19:1-68:12
+INJECTED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:19:1-68:12
+	package
+		INJECTED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:19:11-69
+uses-permission#android.permission.VIBRATE
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:20:5-66
+	android:name
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:20:22-63
+uses-permission#android.permission.READ_USER_DICTIONARY
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:21:5-79
+	android:name
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:21:22-76
+application
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:23:5-67:19
+INJECTED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:23:5-67:19
+	android:extractNativeLibs
+		INJECTED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml
+	android:label
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:25:9-41
+	android:icon
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:24:9-38
+service#com.googlecode.tcime.unofficial.ZhuyinIME
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:26:9-37:19
+	android:label
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:29:13-52
+	android:exported
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:28:13-36
+	android:permission
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:30:13-70
+	android:name
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:27:13-37
+intent-filter#action:name:android.view.InputMethod
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:31:13-33:29
+action#android.view.InputMethod
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:32:17-67
+	android:name
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:32:25-64
+meta-data#android.view.im
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:34:13-36:50
+	android:resource
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:36:17-47
+	android:name
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:35:17-47
+service#com.googlecode.tcime.unofficial.CangjieIME
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:39:9-50:19
+	android:label
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:42:13-53
+	android:exported
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:41:13-36
+	android:permission
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:43:13-70
+	android:name
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:40:13-38
+activity#com.googlecode.tcime.unofficial.ImePreferenceActivity
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:52:9-59:20
+	android:label
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:55:13-45
+	android:exported
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:54:13-36
+	android:name
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:53:13-49
+intent-filter#action:name:android.intent.action.MAIN
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:56:13-58:29
+action#android.intent.action.MAIN
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:57:17-69
+	android:name
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:57:25-66
+activity#com.googlecode.tcime.unofficial.BarcodeScannerActivity
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:61:9-63:56
+	android:label
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:63:13-53
+	android:name
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:62:13-50
+activity#com.googlecode.tcime.unofficial.VoiceRecognitionActivity
+ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:64:9-66:55
+	android:label
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:66:13-52
+	android:name
+		ADDED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml:65:13-52
+uses-sdk
+INJECTED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml
+INJECTED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/yhh/StudioProjects/android-tcime-unofficial-postmarket/app/src/main/AndroidManifest.xml
