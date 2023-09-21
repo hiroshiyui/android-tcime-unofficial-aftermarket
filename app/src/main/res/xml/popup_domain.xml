@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /*
  * Copyright 2010 Google Inc.
  *
@@ -21,15 +20,26 @@
     android:keyWidth="15%p"
     android:horizontalGap="0px"
     android:verticalGap="0px"
-    android:keyHeight="@dimen/key_height_popup"
-    >
+    android:keyHeight="@dimen/key_height_popup">
 
     <Row android:rowEdgeFlags="top|bottom">
-        <Key android:keyLabel=".org" android:keyOutputText=".org" android:keyEdgeFlags="left" />
-        <Key android:keyLabel=".net" android:keyOutputText=".net" />
-        <Key android:keyLabel=".gov" android:keyOutputText=".gov" />
-        <Key android:keyLabel=".edu" android:keyOutputText=".edu" />
-        <Key android:keyLabel=".com" android:keyOutputText=".com" android:keyEdgeFlags="right" />
+        <Key
+            android:keyLabel=".org"
+            android:keyOutputText=".org"
+            android:keyEdgeFlags="left" />
+        <Key
+            android:keyLabel=".net"
+            android:keyOutputText=".net" />
+        <Key
+            android:keyLabel=".gov"
+            android:keyOutputText=".gov" />
+        <Key
+            android:keyLabel=".edu"
+            android:keyOutputText=".edu" />
+        <Key
+            android:keyLabel=".com"
+            android:keyOutputText=".com"
+            android:keyEdgeFlags="right" />
     </Row>
 
 </Keyboard>

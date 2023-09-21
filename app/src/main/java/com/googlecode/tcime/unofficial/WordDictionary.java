@@ -27,32 +27,32 @@ import java.util.concurrent.CountDownLatch;
  */
 public abstract class WordDictionary {
 
-  private final CountDownLatch loading = new CountDownLatch(1);
-  private final DictionaryLoader loader;
+    private final CountDownLatch loading = new CountDownLatch(1);
+    private final DictionaryLoader loader;
 
-  protected WordDictionary(
-      Context context, int dictionaryId, int approxDictionarySize) {
-    loader = new DictionaryLoader(
-        context.getResources().openRawResource(dictionaryId),
-        approxDictionarySize, loading);
-    new Thread(loader).start();
-  }
-
-  protected char[][] dictionary() {
-    try {
-      loading.await();
-    } catch (InterruptedException e) {
-      Log.e("WordDictionary", "Loading is interrupted: ", e);
+    protected WordDictionary(
+            Context context, int dictionaryId, int approxDictionarySize) {
+        loader = new DictionaryLoader(
+                context.getResources().openRawResource(dictionaryId),
+                approxDictionarySize, loading);
+        new Thread(loader).start();
     }
-    return loader.result();
-  }
 
-  /**
-   * Returns a string containing words as suggestions for the specified input.
-   * 
-   * @param input should not be null.
-   * @return a concatenated string of characters, or an empty string if there
-   *     is no word for that input.
-   */
-  public abstract String getWords(CharSequence input);
+    protected char[][] dictionary() {
+        try {
+            loading.await();
+        } catch (InterruptedException e) {
+            Log.e("WordDictionary", "Loading is interrupted: ", e);
+        }
+        return loader.result();
+    }
+
+    /**
+     * Returns a string containing words as suggestions for the specified input.
+     *
+     * @param input should not be null.
+     * @return a concatenated string of characters, or an empty string if there
+     * is no word for that input.
+     */
+    public abstract String getWords(CharSequence input);
 }

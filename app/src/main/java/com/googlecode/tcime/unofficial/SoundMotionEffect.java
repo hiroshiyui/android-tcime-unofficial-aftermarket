@@ -26,49 +26,49 @@ import android.preference.PreferenceManager;
  * Plays sound and motion effect.
  */
 public class SoundMotionEffect {
-  private static final int VIBRATE_DURATION = 30;
-  private static final float FX_VOLUME = -1.0f;
+    private static final int VIBRATE_DURATION = 30;
+    private static final float FX_VOLUME = -1.0f;
 
-  private final Context context;
-  private final SharedPreferences preferences;
-  private final String vibrateKey;
-  private final String soundKey;
+    private final Context context;
+    private final SharedPreferences preferences;
+    private final String vibrateKey;
+    private final String soundKey;
 
-  private boolean vibrateOn;
-  private Vibrator vibrator;
-  private boolean soundOn;
-  private AudioManager audioManager;
+    private boolean vibrateOn;
+    private Vibrator vibrator;
+    private boolean soundOn;
+    private AudioManager audioManager;
 
-  public SoundMotionEffect(Context context) {
-    this.context = context;
-    preferences = PreferenceManager.getDefaultSharedPreferences(context);
-    vibrateKey = context.getString(R.string.prefs_vibrate_key);
-    soundKey = context.getString(R.string.prefs_sound_key);
-  }
-
-  public void reset() {
-    vibrateOn = preferences.getBoolean(vibrateKey, false);
-    if (vibrateOn && (vibrator == null)) {
-      vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+    public SoundMotionEffect(Context context) {
+        this.context = context;
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        vibrateKey = context.getString(R.string.prefs_vibrate_key);
+        soundKey = context.getString(R.string.prefs_sound_key);
     }
 
-    soundOn = preferences.getBoolean(soundKey, false);
-    if (soundOn && (audioManager == null)) {
-      audioManager = 
-        (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-    }
-  }
+    public void reset() {
+        vibrateOn = preferences.getBoolean(vibrateKey, false);
+        if (vibrateOn && (vibrator == null)) {
+            vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        }
 
-  public void vibrate() {
-    if (vibrateOn && (vibrator != null)) {
-      vibrator.vibrate(VIBRATE_DURATION);
+        soundOn = preferences.getBoolean(soundKey, false);
+        if (soundOn && (audioManager == null)) {
+            audioManager =
+                    (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        }
     }
-  }
 
-  public void playSound() {
-    if (soundOn && (audioManager != null)) {
-      audioManager.playSoundEffect(
-          AudioManager.FX_KEYPRESS_STANDARD, FX_VOLUME);
+    public void vibrate() {
+        if (vibrateOn && (vibrator != null)) {
+            vibrator.vibrate(VIBRATE_DURATION);
+        }
     }
-  }
+
+    public void playSound() {
+        if (soundOn && (audioManager != null)) {
+            audioManager.playSoundEffect(
+                    AudioManager.FX_KEYPRESS_STANDARD, FX_VOLUME);
+        }
+    }
 }

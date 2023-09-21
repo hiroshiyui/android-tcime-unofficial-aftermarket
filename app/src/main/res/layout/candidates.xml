@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /*
  * Copyright 2010 Google Inc.
  *
@@ -17,39 +16,36 @@
  */
 -->
 
-<com.googlecode.tcime.unofficial.CandidatesContainer
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<com.googlecode.tcime.unofficial.CandidatesContainer xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/candidates_container"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/candidates_container_bg"
-        >
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/candidates_container_bg"
+    android:orientation="horizontal">
 
     <ImageButton
         android:id="@+id/arrow_left"
-        android:background="@drawable/arrow_bg"
-        app:srcCompat="@drawable/arrow_left"
         android:layout_width="33dp"
         android:layout_height="fill_parent"
+        android:background="@drawable/arrow_bg"
         android:clickable="true"
-        />
+        android:focusable="true"
+        app:srcCompat="@drawable/arrow_left" />
 
     <com.googlecode.tcime.unofficial.CandidateView
         android:id="@+id/candidate_view"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/candidates_view_height"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
 
     <ImageButton
         android:id="@+id/arrow_right"
-        android:background="@drawable/arrow_bg"
-        app:srcCompat="@drawable/arrow_right"
         android:layout_width="33dp"
         android:layout_height="fill_parent"
+        android:background="@drawable/arrow_bg"
         android:clickable="true"
-        />
+        android:focusable="true"
+        app:srcCompat="@drawable/arrow_right" />
 
 </com.googlecode.tcime.unofficial.CandidatesContainer>
