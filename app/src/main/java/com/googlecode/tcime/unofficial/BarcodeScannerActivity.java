@@ -16,20 +16,20 @@
 
 package com.googlecode.tcime.unofficial;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
-public class BarcodeScannerActivity extends Activity {
+
+public class BarcodeScannerActivity extends AppCompatActivity {
 	private static final String TAG = "TCIME";
 	private static final String PACKAGE = "com.google.zxing.client.android";
 	private static final Method SET_PACKAGE;

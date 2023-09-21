@@ -16,17 +16,17 @@
 
 package com.googlecode.tcime.unofficial;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 
 public class BarcodeScannerActivity extends Activity {
@@ -46,7 +46,7 @@ public class BarcodeScannerActivity extends Activity {
 	/**
 	 * Create an Intent to scan a QR Code as text
 	 *
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 * @see AppCompatActivity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public class BarcodeScannerActivity extends Activity {
 	/**
 	 * Called when Barcode Scanner got the data.
 	 *
-	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+	 * @see AppCompatActivity#onActivityResult(int, int, android.content.Intent)
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

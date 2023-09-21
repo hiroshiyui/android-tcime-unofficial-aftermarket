@@ -19,7 +19,8 @@
 
 <com.googlecode.tcime.unofficial.CandidatesContainer
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/candidates_container"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/candidates_container"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -29,7 +30,7 @@
     <ImageButton
         android:id="@+id/arrow_left"
         android:background="@drawable/arrow_bg"
-        android:src="@drawable/arrow_left"
+        app:srcCompat="@drawable/arrow_left"
         android:layout_width="33dp"
         android:layout_height="fill_parent"
         android:clickable="true"
@@ -45,7 +46,7 @@
     <ImageButton
         android:id="@+id/arrow_right"
         android:background="@drawable/arrow_bg"
-        android:src="@drawable/arrow_right"
+        app:srcCompat="@drawable/arrow_right"
         android:layout_width="33dp"
         android:layout_height="fill_parent"
         android:clickable="true"

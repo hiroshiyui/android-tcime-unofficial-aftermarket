@@ -16,19 +16,19 @@
 
 package com.googlecode.tcime.unofficial;
 
-import java.util.ArrayList;
-
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.util.ArrayList;
 
-public class VoiceRecognitionActivity extends Activity {
+
+public class VoiceRecognitionActivity extends AppCompatActivity {
 	private static final String TAG = "TCIME";
 
 	/**

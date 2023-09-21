@@ -16,11 +16,11 @@
 
 package com.googlecode.tcime.unofficial;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
