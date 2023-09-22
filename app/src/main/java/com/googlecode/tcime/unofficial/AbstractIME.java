@@ -27,6 +27,7 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 
 import android.util.Log;
 import android.view.KeyEvent;
@@ -58,7 +59,6 @@ public abstract class AbstractIME extends InputMethodService implements
     protected boolean isHardKeyboardShow;
     private int toastShowedCount = 0;
     private BroadcastReceiver txtReceiver;
-    private AlertDialog mOptionsDialog;
     private static final int MENU_BARCODESCAN = 2; //0
     private static final int MENU_VOICEINPUT = 3; //1
     private static final int MENU_SETTINGS = 0; //2
@@ -96,7 +96,7 @@ public abstract class AbstractIME extends InputMethodService implements
         };
         IntentFilter iFilter = new IntentFilter();
         iFilter.addAction(TEXT_GOT);
-        registerReceiver(txtReceiver, iFilter);
+        ContextCompat.registerReceiver(this, txtReceiver, iFilter, ContextCompat.RECEIVER_NOT_EXPORTED);
         // Use the following line to debug IME service.
         //android.os.Debug.waitForDebugger();
     }
@@ -148,10 +148,23 @@ public abstract class AbstractIME extends InputMethodService implements
     }
 
     @Override
+    public void onStartInput(EditorInfo attribute, boolean restarting) {
+        super.onStartInput(attribute, restarting);
+        // Android 13 compatibility
+        // ref: https://github.com/klausw/hackerskeyboard/commit/c504b79f3783cbf1f6228014fdd0bad288ad0d2c
+        super.setCandidatesViewShown(true);
+    }
+
+    @Override
     public View onCreateCandidatesView() {
+        Log.d(this.getClass().getSimpleName(), "onCreateCandidatesView()");
         candidatesContainer = (CandidatesContainer) getLayoutInflater().inflate(
                 R.layout.candidates, null);
         candidatesContainer.setCandidateViewListener(this);
+        // Android 13 compatibility
+        // ref: https://github.com/klausw/hackerskeyboard/commit/c504b79f3783cbf1f6228014fdd0bad288ad0d2c
+        super.setCandidatesViewShown(true);
+        setExtractViewShown(onEvaluateFullscreenMode());
         return candidatesContainer;
     }
 
@@ -311,7 +324,9 @@ public abstract class AbstractIME extends InputMethodService implements
 
     private void setCandidates(String words, boolean highlightDefault) {
         if (candidatesContainer != null) {
+            Log.d(this.getClass().getSimpleName(), String.valueOf(candidatesContainer.isShown()));
             setCandidatesViewShown((words.length() > 0) || editor.hasComposingText());
+            Log.d(this.getClass().getSimpleName(), String.valueOf(candidatesContainer.isShown()));
             candidatesContainer.setCandidates(words, highlightDefault);
             if (inputView != null) {
                 inputView.setEscape(candidatesContainer.isShown());
@@ -362,7 +377,7 @@ public abstract class AbstractIME extends InputMethodService implements
                                     }
                                 }
                             });
-            mOptionsDialog = builder.create();
+            AlertDialog mOptionsDialog = builder.create();
             Window window = mOptionsDialog.getWindow();
             WindowManager.LayoutParams lp = window.getAttributes();
             lp.token = inputView.getWindowToken();
