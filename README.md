@@ -1,4 +1,6 @@
-# android-tcime-unofficial-postmarket 「注音倉頡輸入法非官方版」之「副廠料件版」
+# android-tcime-unofficial-postmarket
+
+## 「注音倉頡輸入法非官方版」之「副廠料件版」
 
 這是「注音倉頡輸入法非官方版」（[原始網站](https://code.google.com/archive/p/android-tcime-unofficial/)、[原非官方版作者 GitHub 映射站](https://github.com/scribetw/android-tcime-unofficial)）的「副廠料件版」(postmarket)。我只是接受委託，做一些必要的新版 Android 相容維護，恕不接受增加新功能的請求。
 
