@@ -22,5 +22,5 @@
     <dimen name="key_height_popup">50dip</dimen>
     <dimen name="key_height_5row">42dip</dimen>
     <dimen name="candidate_font_height">28sp</dimen>
-    <dimen name="candidates_view_height">42sp</dimen>
+    <dimen name="candidates_view_height">48dip</dimen>
 </resources>

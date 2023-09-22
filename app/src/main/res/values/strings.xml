@@ -57,4 +57,6 @@
     <string name="voice_missing">您的裝置必須要有 Google 語音輸入支援 (需要 Android 系統支援)</string>
     <string name="voice_speaknow">請說話</string>
     <string name="voice_chooseone">請選擇一個</string>
+    <string name="leftButton">Left</string>
+    <string name="rightButton">Right</string>
 </resources>

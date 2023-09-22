@@ -30,7 +30,9 @@
         android:layout_height="fill_parent"
         android:background="@drawable/arrow_bg"
         android:clickable="true"
+        android:contentDescription="@string/leftButton"
         android:focusable="true"
+        android:src="@drawable/arrow_left"
         app:srcCompat="@drawable/arrow_left" />
 
     <com.googlecode.tcime.unofficial.CandidateView
@@ -45,7 +47,9 @@
         android:layout_height="fill_parent"
         android:background="@drawable/arrow_bg"
         android:clickable="true"
+        android:contentDescription="@string/rightButton"
         android:focusable="true"
+        android:src="@drawable/arrow_right"
         app:srcCompat="@drawable/arrow_right" />
 
 </com.googlecode.tcime.unofficial.CandidatesContainer>
