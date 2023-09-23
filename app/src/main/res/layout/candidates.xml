@@ -24,15 +24,15 @@
     android:background="@drawable/candidates_container_bg"
     android:orientation="horizontal">
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/arrow_left"
-        android:layout_width="33dp"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/arrow_bg"
         android:clickable="true"
         android:contentDescription="@string/leftButton"
         android:focusable="true"
-        android:src="@drawable/arrow_left"
+        android:scaleType="center"
         app:srcCompat="@drawable/arrow_left" />
 
     <com.googlecode.tcime.unofficial.CandidateView
@@ -41,15 +41,15 @@
         android:layout_height="@dimen/candidates_view_height"
         android:layout_weight="1" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/arrow_right"
-        android:layout_width="33dp"
-        android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/arrow_bg"
         android:clickable="true"
         android:contentDescription="@string/rightButton"
         android:focusable="true"
-        android:src="@drawable/arrow_right"
+        android:scaleType="center"
         app:srcCompat="@drawable/arrow_right" />
 
 </com.googlecode.tcime.unofficial.CandidatesContainer>
