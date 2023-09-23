@@ -13,68 +13,59 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.googlecode.tcime.unofficial.postmarket
 
-package com.googlecode.tcime.unofficial;
-
-import android.content.Context;
+import android.content.Context
 
 /**
  * Extends WordDictionary to provide zhuyin word-suggestions.
  */
-public class ZhuyinDictionary extends WordDictionary {
-
-    private static final int APPROX_DICTIONARY_SIZE = 65536;
-    private static final int TONES_COUNT = ZhuyinTable.getTonesCount();
-
-    public ZhuyinDictionary(Context context) {
-        super(context, R.raw.dict_zhuyin, APPROX_DICTIONARY_SIZE);
-    }
-
-    @Override
-    public String getWords(CharSequence input) {
+class ZhuyinDictionary(context: Context?) :
+    WordDictionary(context!!, R.raw.dict_zhuyin, APPROX_DICTIONARY_SIZE) {
+    override fun getWords(input: CharSequence?): String {
         // Look up the syllables index; return empty string for invalid syllables.
-        String[] pair = ZhuyinTable.stripTones(input.toString());
-        int syllablesIndex = (pair != null) ?
-                ZhuyinTable.getSyllablesIndex(pair[0]) : -1;
+        val pair = ZhuyinTable.stripTones(input.toString())
+        val syllablesIndex = if (pair != null) ZhuyinTable.getSyllablesIndex(pair[0]) else -1
         if (syllablesIndex < 0) {
-            return "";
+            return ""
         }
 
         // [22-initials * 39-finals] syllables array; each syllables entry points to
         // a char[] containing words for that syllables.
-        char[][] dictionary = dictionary();
-        char[] data = (dictionary != null) ? dictionary[syllablesIndex] : null;
-        if (data == null) {
-            return "";
-        }
+        val dictionary = dictionary()
+        val data = (dictionary[syllablesIndex]) ?: return ""
 
         // Counts of words for each tone are stored in the array beginning.
-        int tone = ZhuyinTable.getTones(pair[1].charAt(0));
-        int length = 0;
+        var tone = ZhuyinTable.getTones(pair!![1][0])
+        var length = 0
         // Default tone: show first available tone group words for selecting
         // If first tone not found, find second tone. If second not found, find third... Unless there's one tone available.
         if (tone == 0) {
-            for (tone = 0; tone < TONES_COUNT; tone++) {
-                length = (int) data[tone];
+            tone = 0
+            while (tone < TONES_COUNT) {
+                length = data[tone].code
                 // Found one tone available
                 if (length > 0) {
-                    break;
+                    break
                 }
+                tone++
             }
             // Now tone = one available tone (May not be first tone)
         } else {
-            length = (int) data[tone];
+            length = data[tone].code
         }
-
         if (length == 0) {
-            return "";
+            return ""
         }
-
-        int start = TONES_COUNT;
-        for (int i = 0; i < tone; i++) {
-            start += (int) data[i];
+        var start = TONES_COUNT
+        for (i in 0 until tone) {
+            start += data[i].code
         }
+        return String(data, start, length)
+    }
 
-        return String.copyValueOf(data, start, length);
+    companion object {
+        private const val APPROX_DICTIONARY_SIZE = 65536
+        private val TONES_COUNT = ZhuyinTable.getTonesCount()
     }
 }

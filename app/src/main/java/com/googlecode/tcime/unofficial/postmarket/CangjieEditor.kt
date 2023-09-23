@@ -13,37 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.googlecode.tcime.unofficial;
+package com.googlecode.tcime.unofficial.postmarket
 
 /**
  * Extends Editor to compose by cangjie rules.
  */
-public class CangjieEditor extends Editor {
-    public boolean simplified;
-
-    public void setSimplified(boolean simplified) {
-        this.simplified = simplified;
+class CangjieEditor : Editor() {
+    @JvmField
+    var simplified = false
+    fun setSimplified(simplified: Boolean) {
+        this.simplified = simplified
     }
 
     /**
      * Composes the key-code into the composing-text by cangjie composing rules.
      */
-    @Override
-    public boolean doCompose(int keyCode) {
-        char c = (char) keyCode;
+    public override fun doCompose(keyCode: Int): Boolean {
+        val c = keyCode.toChar()
         if (!CangjieTable.isLetter(c)) {
-            return false;
+            return false
         }
-
-        int maxLength = simplified ?
-                CangjieTable.MAX_SIMPLIFIED_CODE_LENGTH : CangjieTable.MAX_CODE_LENGTH;
-        if (composingText.length() >= maxLength) {
+        val maxLength =
+            if (simplified) CangjieTable.MAX_SIMPLIFIED_CODE_LENGTH else CangjieTable.MAX_CODE_LENGTH
+        if (composingText.length >= maxLength) {
             // Handle the key-code with no-op.
-            return true;
+            return true
         }
-
-        composingText.append(c);
-        return true;
+        composingText.append(c)
+        return true
     }
 }

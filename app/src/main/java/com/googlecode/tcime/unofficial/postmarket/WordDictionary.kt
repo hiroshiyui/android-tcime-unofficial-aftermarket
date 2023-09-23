@@ -13,38 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.googlecode.tcime.unofficial.postmarket
 
-package com.googlecode.tcime.unofficial;
-
-import android.content.Context;
-import android.util.Log;
-
-import java.util.concurrent.CountDownLatch;
+import android.content.Context
+import android.util.Log
+import java.util.concurrent.CountDownLatch
 
 /**
  * Reads a word-dictionary and provides word-suggestions as a list of characters
  * for the specified input.
  */
-public abstract class WordDictionary {
+abstract class WordDictionary protected constructor(
+    context: Context, dictionaryId: Int, approxDictionarySize: Int
+) {
+    private val loading = CountDownLatch(1)
+    private val loader: DictionaryLoader
 
-    private final CountDownLatch loading = new CountDownLatch(1);
-    private final DictionaryLoader loader;
-
-    protected WordDictionary(
-            Context context, int dictionaryId, int approxDictionarySize) {
-        loader = new DictionaryLoader(
-                context.getResources().openRawResource(dictionaryId),
-                approxDictionarySize, loading);
-        new Thread(loader).start();
+    init {
+        loader = DictionaryLoader(
+            context.resources.openRawResource(dictionaryId),
+            approxDictionarySize, loading
+        )
+        Thread(loader).start()
     }
 
-    protected char[][] dictionary() {
+    protected fun dictionary(): Array<CharArray> {
         try {
-            loading.await();
-        } catch (InterruptedException e) {
-            Log.e("WordDictionary", "Loading is interrupted: ", e);
+            loading.await()
+        } catch (e: InterruptedException) {
+            Log.e("WordDictionary", "Loading is interrupted: ", e)
         }
-        return loader.result();
+        return loader.result()
     }
 
     /**
@@ -54,5 +53,5 @@ public abstract class WordDictionary {
      * @return a concatenated string of characters, or an empty string if there
      * is no word for that input.
      */
-    public abstract String getWords(CharSequence input);
+    abstract fun getWords(input: CharSequence?): String?
 }

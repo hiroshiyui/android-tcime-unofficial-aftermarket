@@ -16,7 +16,7 @@
  */
 -->
 
-<com.googlecode.tcime.unofficial.SoftKeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.googlecode.tcime.unofficial.postmarket.SoftKeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/keyboard"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"

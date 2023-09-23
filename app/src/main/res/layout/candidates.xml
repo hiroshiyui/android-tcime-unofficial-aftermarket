@@ -16,7 +16,7 @@
  */
 -->
 
-<com.googlecode.tcime.unofficial.CandidatesContainer xmlns:android="http://schemas.android.com/apk/res/android"
+<com.googlecode.tcime.unofficial.postmarket.CandidatesContainer xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/candidates_container"
     android:layout_width="fill_parent"
@@ -35,7 +35,7 @@
         android:scaleType="center"
         app:srcCompat="@drawable/arrow_left" />
 
-    <com.googlecode.tcime.unofficial.CandidateView
+    <com.googlecode.tcime.unofficial.postmarket.CandidateView
         android:id="@+id/candidate_view"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/candidates_view_height"
@@ -52,4 +52,4 @@
         android:scaleType="center"
         app:srcCompat="@drawable/arrow_right" />
 
-</com.googlecode.tcime.unofficial.CandidatesContainer>
+</com.googlecode.tcime.unofficial.postmarket.CandidatesContainer>

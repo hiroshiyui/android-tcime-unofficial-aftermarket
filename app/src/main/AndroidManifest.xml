@@ -24,6 +24,7 @@
     <application
         android:icon="@drawable/icon"
         android:label="@string/ime_name">
+
         <service
             android:name="ZhuyinIME"
             android:exported="true"
@@ -53,9 +54,11 @@
         <activity
             android:name="ImePreferenceActivity"
             android:exported="true"
-            android:label="@string/ime_name">
+            android:label="@string/ime_name"
+            android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
