@@ -220,9 +220,11 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     private fun commitText(text: CharSequence?) {
-        if (editor.commitText(currentInputConnection, text!!)) {
-            // Clear candidates after committing any text.
-            clearCandidates()
+        text?.let {
+            if (editor.commitText(currentInputConnection, it)) {
+                // Clear candidates after committing any text.
+                clearCandidates()
+            }
         }
     }
 
@@ -289,10 +291,12 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
 
     override fun onPickCandidate(candidate: String?) {
         // Commit the picked candidate and suggest its following words.
-        commitText(candidate)
-        setCandidates(
-            phraseDictionary.getFollowingWords(candidate!![0]), false
-        )
+        candidate?.apply {
+            commitText(this)
+            setCandidates(
+                phraseDictionary.getFollowingWords(this[0]), false
+            )
+        }
     }
 
     private fun clearCandidates() {
@@ -300,8 +304,10 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     private fun setCandidates(words: String?, highlightDefault: Boolean) {
-        setCandidatesViewShown(words!!.isNotEmpty() || editor.hasComposingText())
-        candidatesContainer.setCandidates(words, highlightDefault)
+        words?.apply {
+            setCandidatesViewShown(this.isNotEmpty() || editor.hasComposingText())
+            candidatesContainer.setCandidates(this, highlightDefault)
+        }
         inputView.setEscape(candidatesContainer.isShown)
     }
 
@@ -350,11 +356,13 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
                 }
             val mOptionsDialog = builder.create()
             val window = mOptionsDialog.window
-            val lp = window!!.attributes
-            lp.token = inputView.windowToken
-            lp.type = WindowManager.LayoutParams.TYPE_APPLICATION_ATTACHED_DIALOG
-            window.attributes = lp
-            window.addFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+            window?.let {
+                val lp = it.attributes
+                lp.token = inputView.windowToken
+                lp.type = WindowManager.LayoutParams.TYPE_APPLICATION_ATTACHED_DIALOG
+                it.attributes = lp
+                it.addFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+            }
             mOptionsDialog.show()
             return true
         }

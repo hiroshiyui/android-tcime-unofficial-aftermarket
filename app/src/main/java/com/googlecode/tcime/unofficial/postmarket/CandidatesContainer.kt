@@ -131,8 +131,10 @@ class CandidatesContainer(context: Context, attrs: AttributeSet?) : LinearLayout
     }
 
     private fun enableArrow(arrow: ImageButton?, enabled: Boolean) {
-        arrow!!.isEnabled = enabled
-        arrow.imageAlpha = (if (enabled) ARROW_ALPHA_ENABLED else ARROW_ALPHA_DISABLED)
+        arrow?.let {
+            it.isEnabled = enabled
+            it.imageAlpha = (if (enabled) ARROW_ALPHA_ENABLED else ARROW_ALPHA_DISABLED)
+        }
     }
 
     /**
@@ -165,13 +167,15 @@ class CandidatesContainer(context: Context, attrs: AttributeSet?) : LinearLayout
             velocityY: Float
         ): Boolean {
             // The fling distance is not enough as a paging gesture
-            if (abs(e1!!.x - e2.x) < FLING_DISTANCE_THRESHOLD) {
-                return false
-            }
-            if (e1.x > e2.x) {
-                pageNext()
-            } else {
-                pagePrev()
+            e1?.apply {
+                if (abs(e1.x - e2.x) < FLING_DISTANCE_THRESHOLD) {
+                    return false
+                }
+                if (e1.x > e2.x) {
+                    pageNext()
+                } else {
+                    pagePrev()
+                }
             }
             return true
         }

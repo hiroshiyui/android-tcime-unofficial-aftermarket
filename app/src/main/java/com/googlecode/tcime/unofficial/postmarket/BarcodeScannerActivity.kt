@@ -114,15 +114,6 @@ class BarcodeScannerActivity : AppCompatActivity() {
                     Log.w(TAG, iae)
                 }
             }
-            if (SET_PACKAGE != null) {
-                try {
-                    SET_PACKAGE!!.invoke(intent, pname)
-                } catch (ite: InvocationTargetException) {
-                    Log.w(TAG, ite.targetException)
-                } catch (iae: IllegalAccessException) {
-                    Log.w(TAG, iae)
-                }
-            }
         }
     }
 }
