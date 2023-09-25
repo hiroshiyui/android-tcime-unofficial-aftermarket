@@ -104,7 +104,7 @@ class PhraseDictionary(private val mContext: Context) {
             var result = String(dictionary[2], offset, count)
             // Delete the words that already appear in the phrase file
             // = Shift these words to the front position
-            if (candidateWord.length > 0) {
+            if (candidateWord.isNotEmpty()) {
                 result = result.replace("[$candidateWord]".toRegex(), "")
             }
             candidateWord.append(result)

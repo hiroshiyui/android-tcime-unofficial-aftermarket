@@ -105,10 +105,6 @@ class KeyboardSwitch(private val context: Context, private val chineseKeyboardId
         }
     }
 
-    fun getCurrentKeyboard(): Keyboard? {
-        return currentKeyboard
-    }
-
     /**
      * Switches to the appropriate keyboard based on the type of text being
      * edited, for example, the symbol keyboard for numbers.

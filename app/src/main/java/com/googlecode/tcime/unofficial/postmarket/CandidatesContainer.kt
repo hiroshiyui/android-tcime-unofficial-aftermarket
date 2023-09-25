@@ -17,7 +17,6 @@ package com.googlecode.tcime.unofficial.postmarket
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.View
@@ -25,6 +24,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.core.view.GestureDetectorCompat
 import com.googlecode.tcime.unofficial.postmarket.CandidateView.CandidateViewListener
+import kotlin.math.abs
 import kotlin.math.ceil
 
 /**
@@ -74,9 +74,7 @@ class CandidatesContainer(context: Context, attrs: AttributeSet?) : LinearLayout
             enableArrow(rightArrow, false)
         } else {
             val start = page * CandidateView.MAX_CANDIDATE_COUNT
-            val end = start + Math.min(
-                words!!.length - start, CandidateView.MAX_CANDIDATE_COUNT
-            )
+            val end = start + (words!!.length - start).coerceAtMost(CandidateView.MAX_CANDIDATE_COUNT)
             candidateView.setCandidates(words!!.substring(start, end))
             if (highlightDefault) {
                 candidateView.highlightDefault()
@@ -167,7 +165,7 @@ class CandidatesContainer(context: Context, attrs: AttributeSet?) : LinearLayout
             velocityY: Float
         ): Boolean {
             // The fling distance is not enough as a paging gesture
-            if (Math.abs(e1!!.x - e2.x) < FLING_DISTANCE_THRESHOLD) {
+            if (abs(e1!!.x - e2.x) < FLING_DISTANCE_THRESHOLD) {
                 return false
             }
             if (e1.x > e2.x) {

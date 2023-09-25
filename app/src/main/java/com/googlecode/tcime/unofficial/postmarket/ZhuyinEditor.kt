@@ -45,7 +45,7 @@ class ZhuyinEditor : Editor() {
             }
 
             // Decompose finals.
-            if (syllables.length > 0) {
+            if (syllables.isNotEmpty()) {
                 if (ZhuyinTable.isYiWuYuFinals(syllables[0])) {
                     results[1] = syllables[0]
                     if (syllables.length > 1) {
@@ -89,7 +89,7 @@ class ZhuyinEditor : Editor() {
             }
         } else if (ZhuyinTable.getInitials(c) > 0) {
             // Insert the initial or replace the original initial.
-            if (composingText.length <= 0 || ZhuyinTable.getInitials(composingText[0]) == 0) {
+            if (composingText.isEmpty() || ZhuyinTable.getInitials(composingText[0]) == 0) {
                 composingText.insert(0, c)
             } else {
                 composingText.setCharAt(0, c)

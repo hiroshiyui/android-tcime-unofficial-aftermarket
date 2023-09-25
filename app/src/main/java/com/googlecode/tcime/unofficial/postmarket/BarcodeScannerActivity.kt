@@ -33,7 +33,7 @@ class BarcodeScannerActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val bcScanner = Intent(PACKAGE + ".SCAN")
+        val bcScanner = Intent("$PACKAGE.SCAN")
         if (packageManager.queryIntentActivities(
                 bcScanner,
                 PackageManager.MATCH_DEFAULT_ONLY
@@ -49,7 +49,7 @@ class BarcodeScannerActivity : AppCompatActivity() {
                 .setTitle(R.string.str_notavailable)
                 .setMessage(R.string.barcode_missing)
                 .setPositiveButton(android.R.string.yes) { di, i ->
-                    val uri = Uri.parse("market://search?q=pname:" + PACKAGE)
+                    val uri = Uri.parse("market://search?q=pname:$PACKAGE")
                     val intent = Intent(Intent.ACTION_VIEW, uri)
                     startActivity(intent)
                     finish()

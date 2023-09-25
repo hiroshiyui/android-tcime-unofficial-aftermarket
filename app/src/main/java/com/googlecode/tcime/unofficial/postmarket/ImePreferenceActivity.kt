@@ -34,7 +34,6 @@ import androidx.webkit.WebViewClientCompat
  * Manages IME preferences.
  */
 class ImePreferenceActivity : PreferenceActivity() {
-    private val licenseUrl = "file:///assets/licensing.html"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addPreferencesFromResource(R.xml.prefs)

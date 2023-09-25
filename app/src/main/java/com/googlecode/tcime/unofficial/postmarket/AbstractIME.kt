@@ -306,7 +306,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
 
     private fun setCandidates(words: String?, highlightDefault: Boolean) {
         if (candidatesContainer != null) {
-            setCandidatesViewShown(words!!.length > 0 || editor!!.hasComposingText())
+            setCandidatesViewShown(words!!.isNotEmpty() || editor!!.hasComposingText())
             candidatesContainer!!.setCandidates(words, highlightDefault)
             if (inputView != null) {
                 inputView!!.setEscape(candidatesContainer!!.isShown)

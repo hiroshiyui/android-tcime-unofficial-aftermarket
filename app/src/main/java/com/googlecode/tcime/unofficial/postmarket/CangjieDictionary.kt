@@ -46,7 +46,7 @@ class CangjieDictionary(context: Context) :
         // For example, the first primary entry is for '日' code and looks like:
         // char[0][]: { 0, 0, '日', '曰' }
         val dictionary = dictionary()
-        val data = primaryIndex?.let { dictionary.get(it) } ?: return ""
+        val data = primaryIndex?.let { dictionary[it] } ?: return ""
         if (simplified) {
             // Sort words of this primary index for simplified-cangjie.
             return sortWords(data)
