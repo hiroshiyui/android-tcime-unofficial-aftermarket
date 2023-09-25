@@ -38,7 +38,7 @@ class ZhuyinIME : AbstractIME() {
         return ZhuyinEditor()
     }
 
-    override fun createWordDictionary(context: Context?): WordDictionary {
+    override fun createWordDictionary(context: Context): WordDictionary {
         return ZhuyinDictionary(context)
     }
 
@@ -99,13 +99,13 @@ class ZhuyinIME : AbstractIME() {
 
     override fun onStartInput(attribute: EditorInfo, restarting: Boolean) {
         super.onStartInput(attribute, restarting)
-        showStatusIcon(keyboardSwitch!!.languageIcon)
+        showStatusIcon(keyboardSwitch.languageIcon)
         isMS3 = preferences.getBoolean(getString(R.string.prefs_ms3_key), false)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        showStatusIcon(keyboardSwitch!!.languageIcon)
+        showStatusIcon(keyboardSwitch.languageIcon)
     }
 
     override fun onKeyDown(keyCodeParam: Int, event: KeyEvent): Boolean {
@@ -113,8 +113,7 @@ class ZhuyinIME : AbstractIME() {
         var keyCode = keyCodeParam
         if (hasHardKeyboard) {
             // Check the status
-            val sKB = keyboardSwitch
-                ?.currentKeyboard as SoftKeyboard
+            val sKB = keyboardSwitch.currentKeyboard as SoftKeyboard
             if (!checkHardKeyboardAvailable(sKB)) {
                 return super.onKeyDown(keyCode, event)
             }

@@ -26,19 +26,19 @@ import android.view.inputmethod.EditorInfo
  */
 class CangjieIME : AbstractIME() {
     private var keyMapping: HashMap<Int, Int>? = null
-    private var cangjieEditor: CangjieEditor? = null
-    private var cangjieDictionary: CangjieDictionary? = null
+    private lateinit var cangjieEditor: CangjieEditor
+    private lateinit var cangjieDictionary: CangjieDictionary
     override fun createKeyboardSwitch(context: Context): KeyboardSwitch {
         return KeyboardSwitch(context, R.xml.cangjie)
     }
 
-    override fun createEditor(): Editor? {
+    override fun createEditor(): Editor {
         cangjieEditor = CangjieEditor()
         return cangjieEditor
     }
 
-    override fun createWordDictionary(context: Context?): WordDictionary? {
-        cangjieDictionary = CangjieDictionary(context!!)
+    override fun createWordDictionary(context: Context): WordDictionary {
+        cangjieDictionary = CangjieDictionary(context)
         return cangjieDictionary
     }
 
@@ -76,8 +76,8 @@ class CangjieIME : AbstractIME() {
 
     override fun onStartInput(attribute: EditorInfo, restarting: Boolean) {
         super.onStartInput(attribute, restarting)
-        var ico = keyboardSwitch!!.languageIcon
-        if (ico == R.drawable.ime_ch && cangjieEditor != null && cangjieEditor!!.simplified) {
+        var ico = keyboardSwitch.languageIcon
+        if (ico == R.drawable.ime_ch && cangjieEditor.simplified) {
             ico = R.drawable.ime_chsp
         }
         showStatusIcon(ico)
@@ -85,8 +85,8 @@ class CangjieIME : AbstractIME() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        var ico = keyboardSwitch!!.languageIcon
-        if (ico == R.drawable.ime_ch && cangjieEditor != null && cangjieEditor!!.simplified) {
+        var ico = keyboardSwitch.languageIcon
+        if (ico == R.drawable.ime_ch && cangjieEditor.simplified) {
             ico = R.drawable.ime_chsp
         }
         showStatusIcon(ico)
@@ -96,7 +96,7 @@ class CangjieIME : AbstractIME() {
         // Capture the hardware keyboard
         if (hasHardKeyboard) {
             // Check the status
-            val sKB = keyboardSwitch!!.currentKeyboard as SoftKeyboard
+            val sKB = keyboardSwitch.currentKeyboard as SoftKeyboard
             if (!checkHardKeyboardAvailable(sKB)) {
                 return super.onKeyDown(keyCodeParam, event)
             }
@@ -106,7 +106,7 @@ class CangjieIME : AbstractIME() {
                 // Determine if it is simplified cangjie
                 // Because the sKB we got is old. The Cangjie keyboard should be English after handleShiftSpacekey().
                 val isCangjie = !sKB.isCangjie
-                if (isCangjie && cangjieEditor!!.simplified) showStatusIcon(R.drawable.ime_chsp)
+                if (isCangjie && cangjieEditor.simplified) showStatusIcon(R.drawable.ime_chsp)
                 return true
             }
 
@@ -121,7 +121,7 @@ class CangjieIME : AbstractIME() {
                 if (event.isAltPressed) {
                     clearKeyboardMetaState()
                     onKey(Keyboard.KEYCODE_SHIFT, null)
-                    showStatusIcon(if (cangjieEditor!!.simplified) R.drawable.ime_chsp else R.drawable.ime_ch)
+                    showStatusIcon(if (cangjieEditor.simplified) R.drawable.ime_chsp else R.drawable.ime_ch)
                     return true
                 }
                 // Handle Delete
@@ -153,10 +153,10 @@ class CangjieIME : AbstractIME() {
 
     private fun handleCangjieSimplified(keyCode: Int): Boolean {
         if (keyCode == Keyboard.KEYCODE_SHIFT) {
-            if (inputView != null && inputView!!.toggleCangjieSimplified()) {
-                val simplified = inputView!!.isCangjieSimplified
-                cangjieEditor!!.setSimplified(simplified)
-                cangjieDictionary!!.setSimplified(simplified)
+            if (inputView.toggleCangjieSimplified()) {
+                val simplified = inputView.isCangjieSimplified
+                cangjieEditor.setSimplified(simplified)
+                cangjieDictionary.setSimplified(simplified)
                 escape()
                 return true
             }
