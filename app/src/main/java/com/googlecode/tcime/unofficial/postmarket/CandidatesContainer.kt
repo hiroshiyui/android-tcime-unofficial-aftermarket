@@ -35,7 +35,7 @@ class CandidatesContainer(context: Context, attrs: AttributeSet?) : LinearLayout
     private lateinit var candidateView: CandidateView
     private lateinit var leftArrow: ImageButton
     private lateinit var rightArrow: ImageButton
-    private var words: String? = null
+    private var words: String = ""
     private var highlightDefault = false
     private var currentPage = 0
     private var pageCount = 0
@@ -55,7 +55,7 @@ class CandidatesContainer(context: Context, attrs: AttributeSet?) : LinearLayout
         candidateView.setCandidateViewListener(listener)
     }
 
-    fun setCandidates(words: String?, highlightDefault: Boolean) {
+    fun setCandidates(words: String, highlightDefault: Boolean) {
         // All the words will be split into pages and shown in the candidate-view.
         this.words = words
         this.highlightDefault = highlightDefault
@@ -74,8 +74,8 @@ class CandidatesContainer(context: Context, attrs: AttributeSet?) : LinearLayout
             enableArrow(rightArrow, false)
         } else {
             val start = page * CandidateView.MAX_CANDIDATE_COUNT
-            val end = start + (words!!.length - start).coerceAtMost(CandidateView.MAX_CANDIDATE_COUNT)
-            candidateView.setCandidates(words!!.substring(start, end))
+            val end = start + (words.length - start).coerceAtMost(CandidateView.MAX_CANDIDATE_COUNT)
+            candidateView.setCandidates(words.substring(start, end))
             if (highlightDefault) {
                 candidateView.highlightDefault()
             }
@@ -126,7 +126,7 @@ class CandidatesContainer(context: Context, attrs: AttributeSet?) : LinearLayout
 
     private fun getPageCount(): Int {
         return ceil(
-            words!!.length.toDouble() / CandidateView.MAX_CANDIDATE_COUNT
+            words.length.toDouble() / CandidateView.MAX_CANDIDATE_COUNT
         ).toInt()
     }
 

@@ -22,7 +22,8 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/candidates_container_bg"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:theme="@style/Theme.AppCompat.Light">
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/arrow_left"

@@ -117,7 +117,7 @@ class PhraseDictionary(private val mContext: Context) {
         /**
          * Load the content of user dictionary
          */
-        private get() {
+        get() {
             // Use ContentResolver to query the user dictionary
             val cursor = mContext.contentResolver
                 .query(

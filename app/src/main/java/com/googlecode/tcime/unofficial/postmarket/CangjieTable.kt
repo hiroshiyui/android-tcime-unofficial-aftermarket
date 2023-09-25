@@ -114,7 +114,7 @@ internal object CangjieTable {
         }
         val maxEnd = MAX_CODE_LENGTH - 1
         for (i in last until maxEnd) {
-            index = index * BASE_NUMBER
+            index *= BASE_NUMBER
         }
         return index
     }

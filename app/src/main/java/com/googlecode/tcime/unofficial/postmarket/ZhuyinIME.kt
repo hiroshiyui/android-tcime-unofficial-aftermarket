@@ -113,7 +113,7 @@ class ZhuyinIME : AbstractIME() {
         var keyCode = keyCodeParam
         if (hasHardKeyboard) {
             // Check the status
-            val sKB = keyboardSwitch.currentKeyboard as SoftKeyboard
+            val sKB = keyboardSwitch.currentKeyboard
             if (!checkHardKeyboardAvailable(sKB)) {
                 return super.onKeyDown(keyCode, event)
             }
@@ -125,7 +125,7 @@ class ZhuyinIME : AbstractIME() {
             }
 
             // Handle HardKB event on Chinese mode only
-            if (sKB.isChinese) {
+            if (sKB?.isChinese == true) {
                 // Milestone first row key
                 // (If alt is pressed before, emulate 1 - 0 keys)
                 if (isAltUsed || event.isAltPressed) {

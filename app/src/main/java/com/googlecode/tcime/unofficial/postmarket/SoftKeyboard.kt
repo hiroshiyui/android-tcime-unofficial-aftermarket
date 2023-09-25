@@ -25,10 +25,10 @@ import android.inputmethodservice.Keyboard
  * A soft keyboard definition.
  */
 class SoftKeyboard(context: Context?, @JvmField val id: Int) : Keyboard(context, id) {
-    private var symbolKey: Key? = null
-    private var enterKey: Key? = null
-    private var enterIcon: Drawable? = null
-    private var enterPreviewIcon: Drawable? = null
+    private lateinit var symbolKey: Key
+    private lateinit var enterKey: Key
+    private lateinit var enterIcon: Drawable
+    private lateinit var enterPreviewIcon: Drawable
 
     // Escape-key is the enter-key set 'Esc'.
     var escapeKeyIndex = 0
@@ -62,9 +62,7 @@ class SoftKeyboard(context: Context?, @JvmField val id: Int) : Keyboard(context,
             // number-symbol keyboard and shifted-on for shift-symbol keyboard.
             isShifted = isShiftSymbol
         }
-        if (symbolKey != null) {
-            symbolKey!!.on = isSymbols
-        }
+        symbolKey.on = isSymbols
     }
 
     fun hasEscape(): Boolean {
@@ -77,16 +75,16 @@ class SoftKeyboard(context: Context?, @JvmField val id: Int) : Keyboard(context,
      * @return `true` if the key is changed.
      */
     fun setEscape(escapeState: Boolean): Boolean {
-        if (escaped != escapeState && enterKey != null) {
+        if (escaped != escapeState) {
             if (SoftKeyboardView.canRedrawKey()) {
                 if (escapeState) {
-                    enterKey!!.icon = null
-                    enterKey!!.iconPreview = null
-                    enterKey!!.label = ESCAPE_LABEL
+                    enterKey.icon = null
+                    enterKey.iconPreview = null
+                    enterKey.label = ESCAPE_LABEL
                 } else {
-                    enterKey!!.icon = enterIcon
-                    enterKey!!.iconPreview = enterPreviewIcon
-                    enterKey!!.label = null
+                    enterKey.icon = enterIcon
+                    enterKey.iconPreview = enterPreviewIcon
+                    enterKey.label = null
                 }
             }
             escaped = escapeState

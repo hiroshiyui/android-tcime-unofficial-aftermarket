@@ -19,11 +19,7 @@ package com.googlecode.tcime.unofficial.postmarket
  * Extends Editor to compose by cangjie rules.
  */
 class CangjieEditor : Editor() {
-    @JvmField
-    var simplified = false
-    fun setSimplified(simplified: Boolean) {
-        this.simplified = simplified
-    }
+    var simplified: Boolean = false
 
     /**
      * Composes the key-code into the composing-text by cangjie composing rules.

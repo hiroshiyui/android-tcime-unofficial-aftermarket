@@ -25,7 +25,7 @@ import android.view.inputmethod.EditorInfo
  * Cangjie input method.
  */
 class CangjieIME : AbstractIME() {
-    private var keyMapping: HashMap<Int, Int>? = null
+    private lateinit var keyMapping: HashMap<Int, Int>
     private lateinit var cangjieEditor: CangjieEditor
     private lateinit var cangjieDictionary: CangjieDictionary
     override fun createKeyboardSwitch(context: Context): KeyboardSwitch {
@@ -44,34 +44,33 @@ class CangjieIME : AbstractIME() {
 
     override fun onCreate() {
         super.onCreate()
-        keyMapping = HashMap()
-        keyMapping!![KeyEvent.KEYCODE_Q] = 25163
-        keyMapping!![KeyEvent.KEYCODE_W] = 30000
-        keyMapping!![KeyEvent.KEYCODE_E] = 27700
-        keyMapping!![KeyEvent.KEYCODE_R] = 21475
-        keyMapping!![KeyEvent.KEYCODE_T] = 24319
-        keyMapping!![KeyEvent.KEYCODE_Y] = 21340
-        keyMapping!![KeyEvent.KEYCODE_U] = 23665
-        keyMapping!![KeyEvent.KEYCODE_I] = 25096
-        keyMapping!![KeyEvent.KEYCODE_O] = 20154
-        keyMapping!![KeyEvent.KEYCODE_P] = 24515
-        keyMapping!![KeyEvent.KEYCODE_A] = 26085
-        keyMapping!![KeyEvent.KEYCODE_S] = 23608
-        keyMapping!![KeyEvent.KEYCODE_D] = 26408
-        keyMapping!![KeyEvent.KEYCODE_F] = 28779
-        keyMapping!![KeyEvent.KEYCODE_G] = 22303
-        keyMapping!![KeyEvent.KEYCODE_H] = 31481
-        keyMapping!![KeyEvent.KEYCODE_J] = 21313
-        keyMapping!![KeyEvent.KEYCODE_K] = 22823
-        keyMapping!![KeyEvent.KEYCODE_L] = 20013
+        keyMapping[KeyEvent.KEYCODE_Q] = 25163
+        keyMapping[KeyEvent.KEYCODE_W] = 30000
+        keyMapping[KeyEvent.KEYCODE_E] = 27700
+        keyMapping[KeyEvent.KEYCODE_R] = 21475
+        keyMapping[KeyEvent.KEYCODE_T] = 24319
+        keyMapping[KeyEvent.KEYCODE_Y] = 21340
+        keyMapping[KeyEvent.KEYCODE_U] = 23665
+        keyMapping[KeyEvent.KEYCODE_I] = 25096
+        keyMapping[KeyEvent.KEYCODE_O] = 20154
+        keyMapping[KeyEvent.KEYCODE_P] = 24515
+        keyMapping[KeyEvent.KEYCODE_A] = 26085
+        keyMapping[KeyEvent.KEYCODE_S] = 23608
+        keyMapping[KeyEvent.KEYCODE_D] = 26408
+        keyMapping[KeyEvent.KEYCODE_F] = 28779
+        keyMapping[KeyEvent.KEYCODE_G] = 22303
+        keyMapping[KeyEvent.KEYCODE_H] = 31481
+        keyMapping[KeyEvent.KEYCODE_J] = 21313
+        keyMapping[KeyEvent.KEYCODE_K] = 22823
+        keyMapping[KeyEvent.KEYCODE_L] = 20013
 
         //keyMapping.put(KeyEvent.KEYCODE_Z, 0);
-        keyMapping!![KeyEvent.KEYCODE_X] = 38627
-        keyMapping!![KeyEvent.KEYCODE_C] = 37329
-        keyMapping!![KeyEvent.KEYCODE_V] = 22899
-        keyMapping!![KeyEvent.KEYCODE_B] = 26376
-        keyMapping!![KeyEvent.KEYCODE_N] = 24339
-        keyMapping!![KeyEvent.KEYCODE_M] = 19968
+        keyMapping[KeyEvent.KEYCODE_X] = 38627
+        keyMapping[KeyEvent.KEYCODE_C] = 37329
+        keyMapping[KeyEvent.KEYCODE_V] = 22899
+        keyMapping[KeyEvent.KEYCODE_B] = 26376
+        keyMapping[KeyEvent.KEYCODE_N] = 24339
+        keyMapping[KeyEvent.KEYCODE_M] = 19968
     }
 
     override fun onStartInput(attribute: EditorInfo, restarting: Boolean) {
@@ -113,8 +112,8 @@ class CangjieIME : AbstractIME() {
             // Handle HardKB event on Chinese mode only
             if (sKB.isChinese) {
                 // Simulate soft keyboard press
-                if (keyMapping!!.containsKey(keyCodeParam)) {
-                    onKey(keyMapping!![keyCodeParam]!!, null)
+                if (keyMapping.containsKey(keyCodeParam)) {
+                    onKey(keyMapping[keyCodeParam]!!, null)
                     return true
                 }
                 // Handle Alt (As Cangjie simplified switch)
@@ -154,9 +153,9 @@ class CangjieIME : AbstractIME() {
     private fun handleCangjieSimplified(keyCode: Int): Boolean {
         if (keyCode == Keyboard.KEYCODE_SHIFT) {
             if (inputView.toggleCangjieSimplified()) {
-                val simplified = inputView.isCangjieSimplified
-                cangjieEditor.setSimplified(simplified)
-                cangjieDictionary.setSimplified(simplified)
+                val isCangjieSimplified = inputView.isCangjieSimplified
+                cangjieEditor.simplified = isCangjieSimplified
+                cangjieDictionary.simplified = isCangjieSimplified
                 escape()
                 return true
             }

@@ -25,11 +25,8 @@ import java.util.Locale
  */
 class CangjieDictionary(context: Context) :
     WordDictionary(context, R.raw.dict_cangjie, APPROX_DICTIONARY_SIZE) {
-    private var simplified = false
+    var simplified = false
     private val collator = Collator.getInstance(Locale.TRADITIONAL_CHINESE)
-    fun setSimplified(simplified: Boolean) {
-        this.simplified = simplified
-    }
 
     override fun getWords(input: CharSequence?): String {
         // Look up the index in the dictionary for the specified input.
