@@ -83,14 +83,14 @@ abstract class Editor {
      * Commits the given text to the editing field.
      */
     fun commitText(ic: InputConnection?, text: CharSequence): Boolean {
-        if (ic != null) {
+        ic?.apply {
             if (text.length > 1) {
                 // Batch edit a sequence of characters.
-                ic.beginBatchEdit()
-                ic.commitText(text, 1)
-                ic.endBatchEdit()
+                beginBatchEdit()
+                commitText(text, 1)
+                endBatchEdit()
             } else {
-                ic.commitText(text, 1)
+                commitText(text, 1)
             }
             // Composing-text in the editor has been cleared.
             composingText.setLength(0)
