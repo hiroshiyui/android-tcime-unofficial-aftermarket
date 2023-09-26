@@ -33,11 +33,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.googlecode.tcime.unofficial.postmarket.CandidateView.CandidateViewListener
+import com.googlecode.tcime.unofficial.postmarket.databinding.CandidatesLayoutBinding
+import com.googlecode.tcime.unofficial.postmarket.databinding.KeyboardLayoutBinding
 
 /**
  * Abstract class extended by ZhuyinIME and CangjieIME.
  */
 abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, CandidateViewListener {
+    private lateinit var viewBinding: KeyboardLayoutBinding
+    private lateinit var candidatesLayoutBinding: CandidatesLayoutBinding
+
     private var textGot: String? = ""
     protected lateinit var inputView: SoftKeyboardView
     private lateinit var candidatesContainer: CandidatesContainer
@@ -127,9 +132,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onCreateInputView(): View {
-        inputView = layoutInflater.inflate(
-            R.layout.input, null
-        ) as SoftKeyboardView
+        viewBinding = KeyboardLayoutBinding.inflate(layoutInflater)
+        inputView = viewBinding.root
         inputView.setOnKeyboardActionListener(this)
         return inputView
     }
@@ -142,9 +146,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onCreateCandidatesView(): View {
-        candidatesContainer = layoutInflater.inflate(
-            R.layout.candidates, null
-        ) as CandidatesContainer
+        candidatesLayoutBinding = CandidatesLayoutBinding.inflate(layoutInflater)
+        candidatesContainer = candidatesLayoutBinding.root
         candidatesContainer.setCandidateViewListener(this)
         // Android 13 compatibility
         // ref: https://github.com/klausw/hackerskeyboard/commit/c504b79f3783cbf1f6228014fdd0bad288ad0d2c
