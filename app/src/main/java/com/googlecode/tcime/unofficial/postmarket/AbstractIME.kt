@@ -494,13 +494,13 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     /**
      * Check if the hard keyboard can be used. To avoid force crash.
      *
-     * @param sKB The soft keyboard object. To check if it is ready.
+     * @param softKeyboard The soft keyboard object. To check if it is ready.
      * @return true if hard keyboard can be used
      */
-    fun checkHardKeyboardAvailable(sKB: SoftKeyboard?): Boolean {
+    fun checkHardKeyboardAvailable(softKeyboard: SoftKeyboard?): Boolean {
         // Hard keyboard is not showed
         if (!isHardKeyboardShow) return false
-        if (sKB == null) {
+        if (softKeyboard == null) {
             // Prompt user to close the keyboard and reopen it to initialize
             if (toastShowedCount < 3) {
                 Toast.makeText(this, R.string.str_needsreopen, Toast.LENGTH_SHORT)

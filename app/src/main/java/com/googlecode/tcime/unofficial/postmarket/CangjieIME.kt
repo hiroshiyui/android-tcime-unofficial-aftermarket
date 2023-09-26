@@ -95,22 +95,22 @@ class CangjieIME : AbstractIME() {
         // Capture the hardware keyboard
         if (hasHardKeyboard) {
             // Check the status
-            val sKB = keyboardSwitch.currentKeyboard as SoftKeyboard
-            if (!checkHardKeyboardAvailable(sKB)) {
+            val softKeyboard = keyboardSwitch.currentKeyboard as SoftKeyboard
+            if (!checkHardKeyboardAvailable(softKeyboard)) {
                 return super.onKeyDown(keyCodeParam, event)
             }
 
             // Shift + Space
             if (handleLanguageChange(keyCodeParam, event)) {
                 // Determine if it is simplified cangjie
-                // Because the sKB we got is old. The Cangjie keyboard should be English after handleShiftSpacekey().
-                val isCangjie = !sKB.isCangjie
+                // Because the softKeyboard we got is old. The Cangjie keyboard should be English after handleShiftSpacekey().
+                val isCangjie = !softKeyboard.isCangjie
                 if (isCangjie && cangjieEditor.simplified) showStatusIcon(R.drawable.ime_chsp)
                 return true
             }
 
             // Handle HardKB event on Chinese mode only
-            if (sKB.isChinese) {
+            if (softKeyboard.isChinese) {
                 // Simulate soft keyboard press
                 if (keyMapping.containsKey(keyCodeParam)) {
                     onKey(keyMapping[keyCodeParam]!!, null)
