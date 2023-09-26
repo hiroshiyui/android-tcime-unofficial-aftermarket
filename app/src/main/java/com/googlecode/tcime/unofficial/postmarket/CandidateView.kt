@@ -39,19 +39,17 @@ class CandidateView(context: Context, attrs: AttributeSet?) : View(context, attr
     private lateinit var listener: CandidateViewListener
     private var candidates = ""
     private var highlightIndex = 0
-    private val candidateHighlight: Drawable?
-    private val candidateSeparator: Drawable?
-    private val paint: Paint
+    private val candidateHighlight: Drawable? =
+        ResourcesCompat.getDrawable(resources, R.drawable.candidate_highlight, null)
+    private val candidateSeparator: Drawable? =
+        ResourcesCompat.getDrawable(resources, R.drawable.candidate_separator, null)
+    private val paint: Paint = Paint()
     private val candidateRect = arrayOfNulls<Rect>(MAX_CANDIDATE_COUNT)
 
     init {
-        val r = context.resources
-        candidateHighlight = ResourcesCompat.getDrawable(resources, R.drawable.candidate_highlight, null)
-        candidateSeparator = ResourcesCompat.getDrawable(resources, R.drawable.candidate_separator, null)
-        paint = Paint()
         paint.color = ResourcesCompat.getColor(resources, R.color.candidate_normal, null)
         paint.isAntiAlias = true
-        paint.textSize = r.getDimensionPixelSize(R.dimen.candidate_font_height).toFloat()
+        paint.textSize = resources.getDimensionPixelSize(R.dimen.candidate_font_height).toFloat()
         paint.strokeWidth = 0f
         setWillNotDraw(false)
     }
