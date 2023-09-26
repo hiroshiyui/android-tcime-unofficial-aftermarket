@@ -148,7 +148,14 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     override fun onCreateCandidatesView(): View {
         candidatesContainerLayoutBinding = CandidatesContainerLayoutBinding.inflate(layoutInflater)
         candidatesContainer = candidatesContainerLayoutBinding.root
-        candidatesContainer.setCandidateViewListener(this)
+        candidatesContainer.apply {
+            candidateView = candidatesContainerLayoutBinding.candidateView
+            setCandidateViewListener(this@AbstractIME)
+            leftArrow = candidatesContainerLayoutBinding.arrowLeft
+            leftArrow.setOnClickListener { this.showPage(currentPage - 1) }
+            rightArrow = candidatesContainerLayoutBinding.arrowRight
+            rightArrow.setOnClickListener { this.showPage(currentPage + 1) }
+        }
         // Android 13 compatibility
         // ref: https://github.com/klausw/hackerskeyboard/commit/c504b79f3783cbf1f6228014fdd0bad288ad0d2c
         super.setCandidatesViewShown(true)

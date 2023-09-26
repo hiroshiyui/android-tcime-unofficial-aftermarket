@@ -19,7 +19,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
-import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.core.view.GestureDetectorCompat
@@ -32,22 +31,14 @@ import kotlin.math.ceil
  * or move backward (previous) page to select one of these candidates.
  */
 class CandidatesContainer(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
-    private lateinit var candidateView: CandidateView
-    private lateinit var leftArrow: ImageButton
-    private lateinit var rightArrow: ImageButton
+    lateinit var candidateView: CandidateView
+    lateinit var leftArrow: ImageButton
+    lateinit var rightArrow: ImageButton
     private var words: String = ""
     private var highlightDefault = false
-    private var currentPage = 0
+    var currentPage = 0
     private var pageCount = 0
     private val gestureDetector = GestureDetectorCompat(context, OnGestureListener())
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        candidateView = findViewById<View>(R.id.candidate_view) as CandidateView
-        leftArrow = findViewById<View>(R.id.arrow_left) as ImageButton
-        leftArrow.setOnClickListener { showPage(currentPage - 1) }
-        rightArrow = findViewById<View>(R.id.arrow_right) as ImageButton
-        rightArrow.setOnClickListener { showPage(currentPage + 1) }
-    }
 
     fun setCandidateViewListener(
         listener: CandidateViewListener
@@ -67,7 +58,7 @@ class CandidatesContainer(context: Context, attrs: AttributeSet?) : LinearLayout
         return candidateView.pickHighlighted()
     }
 
-    private fun showPage(page: Int) {
+    fun showPage(page: Int) {
         if (isPageEmpty(page)) {
             candidateView.setCandidates("")
             enableArrow(leftArrow, false)
