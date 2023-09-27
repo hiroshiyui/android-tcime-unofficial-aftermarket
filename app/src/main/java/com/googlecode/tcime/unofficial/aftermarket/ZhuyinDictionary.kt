@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.tcime.unofficial.postmarket
+package com.googlecode.tcime.unofficial.aftermarket
 
 import android.content.Context
 
 /**
  * Extends WordDictionary to provide zhuyin word-suggestions.
  */
-class ZhuyinDictionary(context: Context?) :
-    WordDictionary(context!!, R.raw.dict_zhuyin, APPROX_DICTIONARY_SIZE) {
+class ZhuyinDictionary(context: Context) :
+    WordDictionary(context, R.raw.dict_zhuyin, APPROX_DICTIONARY_SIZE) {
     override fun getWords(input: CharSequence?): String {
         // Look up the syllables index; return empty string for invalid syllables.
         val pair = ZhuyinTable.stripTones(input.toString())

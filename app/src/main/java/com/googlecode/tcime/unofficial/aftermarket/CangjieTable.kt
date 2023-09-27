@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.tcime.unofficial.postmarket
+package com.googlecode.tcime.unofficial.aftermarket
 
 /**
  * Defines cangjie letters and calculates the index of the given cangjie code.

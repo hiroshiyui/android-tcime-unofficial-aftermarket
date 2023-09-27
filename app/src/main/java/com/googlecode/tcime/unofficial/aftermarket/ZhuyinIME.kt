@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.tcime.unofficial.postmarket
+package com.googlecode.tcime.unofficial.aftermarket
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
+import com.googlecode.tcime.unofficial.aftermarket.widgets.KeyboardView.Layout
 
 /**
  * Zhuyin input method.
@@ -31,7 +32,7 @@ class ZhuyinIME : AbstractIME() {
     private var isAltUsed = false
     private var isMS3 = false
     override fun createKeyboardSwitch(context: Context): KeyboardSwitch {
-        return KeyboardSwitch(context, R.xml.zhuyin)
+        return KeyboardSwitch(context, Layout.ZHUYIN)
     }
 
     override fun createEditor(): Editor {

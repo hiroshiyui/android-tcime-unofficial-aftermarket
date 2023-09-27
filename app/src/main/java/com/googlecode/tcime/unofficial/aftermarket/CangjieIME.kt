@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.tcime.unofficial.postmarket
+package com.googlecode.tcime.unofficial.aftermarket
 
 import android.content.Context
 import android.content.res.Configuration
 import android.inputmethodservice.Keyboard
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
+import com.googlecode.tcime.unofficial.aftermarket.widgets.KeyboardView.Layout
 
 /**
  * Cangjie input method.
@@ -29,7 +30,7 @@ class CangjieIME : AbstractIME() {
     private lateinit var cangjieEditor: CangjieEditor
     private lateinit var cangjieDictionary: CangjieDictionary
     override fun createKeyboardSwitch(context: Context): KeyboardSwitch {
-        return KeyboardSwitch(context, R.xml.cangjie)
+        return KeyboardSwitch(context, Layout.CANGJIE)
     }
 
     override fun createEditor(): Editor {
@@ -44,6 +45,7 @@ class CangjieIME : AbstractIME() {
 
     override fun onCreate() {
         super.onCreate()
+        keyMapping = HashMap()
         keyMapping[KeyEvent.KEYCODE_Q] = 25163
         keyMapping[KeyEvent.KEYCODE_W] = 30000
         keyMapping[KeyEvent.KEYCODE_E] = 27700

@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.tcime.unofficial.postmarket
+package com.googlecode.tcime.unofficial.aftermarket
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.inputmethodservice.Keyboard
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import android.text.InputType
+import com.googlecode.tcime.unofficial.aftermarket.widgets.KeyboardView
 
 /**
  * Switches between four input modes: two symbol modes (number-symbol and
@@ -46,7 +47,7 @@ import android.text.InputType
  * SHIFT -> NumberSymbol
 </pre> *
  */
-class KeyboardSwitch(private val context: Context, private val chineseKeyboardId: Int) {
+class KeyboardSwitch(private val context: Context, private val keyboard: KeyboardView.Layout) {
     private var numberSymbolKeyboard: SoftKeyboard? = null
     private var shiftSymbolKeyboard: SoftKeyboard? = null
     private var englishKeyboard: SoftKeyboard? = null
@@ -54,12 +55,8 @@ class KeyboardSwitch(private val context: Context, private val chineseKeyboardId
     var currentKeyboard: SoftKeyboard? = null
     private var wasEnglishToSymbol = false
     private var currentDisplayWidth = 0
-    private val preferences: SharedPreferences
+    private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     private var qwerty5row = false
-
-    init {
-        preferences = PreferenceManager.getDefaultSharedPreferences(context)
-    }
 
     /**
      * Recreates the keyboards if the display-width has been changed.
@@ -79,7 +76,7 @@ class KeyboardSwitch(private val context: Context, private val chineseKeyboardId
             return
         }
         currentDisplayWidth = displayWidth
-        chineseKeyboard = SoftKeyboard(context, chineseKeyboardId)
+        chineseKeyboard = SoftKeyboard(context, keyboard.layoutXmlResource)
         numberSymbolKeyboard = SoftKeyboard(context, R.xml.symbols)
         shiftSymbolKeyboard = SoftKeyboard(context, R.xml.symbols_shift)
         englishKeyboard = SoftKeyboard(context, if (qwerty5row) R.xml.qwerty_5row else R.xml.qwerty)

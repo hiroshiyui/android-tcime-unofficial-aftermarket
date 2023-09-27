@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.tcime.unofficial.postmarket
+package com.googlecode.tcime.unofficial.aftermarket
 
 import android.content.Context
 import android.util.AttributeSet
@@ -22,7 +22,7 @@ import android.view.MotionEvent
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.core.view.GestureDetectorCompat
-import com.googlecode.tcime.unofficial.postmarket.CandidateView.CandidateViewListener
+import com.googlecode.tcime.unofficial.aftermarket.CandidateView.CandidateViewListener
 import kotlin.math.abs
 import kotlin.math.ceil
 

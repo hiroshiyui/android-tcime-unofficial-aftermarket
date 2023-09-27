@@ -13,31 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.tcime.unofficial.postmarket
+package com.googlecode.tcime.unofficial.aftermarket
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.media.AudioManager
 import android.os.Vibrator
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 
 /**
  * Plays sound and motion effect.
  */
 class SoundMotionEffect(private val context: Context) {
-    private val preferences: SharedPreferences
-    private val vibrateKey: String
-    private val soundKey: String
+    private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    private val vibrateKey: String = context.getString(R.string.prefs_vibrate_key)
+    private val soundKey: String = context.getString(R.string.prefs_sound_key)
     private var vibrateOn = false
     private var vibrator: Vibrator? = null
     private var soundOn = false
     private var audioManager: AudioManager? = null
-
-    init {
-        preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        vibrateKey = context.getString(R.string.prefs_vibrate_key)
-        soundKey = context.getString(R.string.prefs_sound_key)
-    }
 
     fun reset() {
         vibrateOn = preferences.getBoolean(vibrateKey, false)

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.tcime.unofficial.postmarket
+package com.googlecode.tcime.unofficial.aftermarket
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -32,9 +32,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import com.googlecode.tcime.unofficial.postmarket.CandidateView.CandidateViewListener
-import com.googlecode.tcime.unofficial.postmarket.databinding.CandidatesContainerLayoutBinding
-import com.googlecode.tcime.unofficial.postmarket.databinding.SoftKeyboardViewLayoutBinding
+import com.googlecode.tcime.unofficial.aftermarket.CandidateView.CandidateViewListener
+import com.googlecode.tcime.unofficial.aftermarket.databinding.CandidatesContainerLayoutBinding
+import com.googlecode.tcime.unofficial.aftermarket.databinding.SoftKeyboardViewLayoutBinding
 
 /**
  * Abstract class extended by ZhuyinIME and CangjieIME.
