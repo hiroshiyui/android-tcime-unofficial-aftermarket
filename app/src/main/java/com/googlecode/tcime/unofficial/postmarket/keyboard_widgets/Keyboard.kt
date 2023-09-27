@@ -7,7 +7,7 @@ import android.widget.RelativeLayout
 import com.googlecode.tcime.unofficial.postmarket.R
 
 abstract class Keyboard(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
-    enum class Layout(val layoutResources: Int) {
+    enum class Layout(val layoutXmlResource: Int) {
         QWERTY(R.xml.qwerty),
         QWERTY_5ROWS(R.xml.qwerty_5row),
         ZHUYIN(R.xml.zhuyin),
