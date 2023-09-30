@@ -31,7 +31,7 @@ class ZhuyinIME : AbstractIME() {
     private lateinit var preferences: SharedPreferences
     private var isAltUsed = false
     private var isMS3 = false
-    override fun createKeyboardSwitch(context: Context): KeyboardSwitch {
+    public override fun createKeyboardSwitch(context: Context): KeyboardSwitch {
         return KeyboardSwitch(context, Layout.ZHUYIN)
     }
 
