@@ -2,6 +2,7 @@ package com.googlecode.tcime.unofficial.aftermarket
 
 import android.content.Context
 import android.content.SharedPreferences
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -13,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 
 @RunWith(MockitoJUnitRunner::class)
-class ZhuyinIMETest {
+class ZhuyinIMELocalTest {
     private var sharedPrefs: SharedPreferences = mock(SharedPreferences::class.java)
     private var context: Context = mock(Context::class.java)
 
@@ -25,10 +26,13 @@ class ZhuyinIMETest {
     }
 
     @Test
-    fun testZhuyinIME() {
+    fun testCreateKeyboardSwitch() {
         val classUnderTest = ZhuyinIME()
         val keyboardSwitch: KeyboardSwitch = classUnderTest.createKeyboardSwitch(context)
+        assertNotNull(keyboardSwitch)
+        keyboardSwitch.initializeKeyboard(960)
         val currentKeyboard = keyboardSwitch.currentKeyboard as SoftKeyboard
-        assert(currentKeyboard.isZhuyin) // currently not passed :-P
+        assertNotNull(currentKeyboard)
+        assert(currentKeyboard.isEnglish)
     }
 }
