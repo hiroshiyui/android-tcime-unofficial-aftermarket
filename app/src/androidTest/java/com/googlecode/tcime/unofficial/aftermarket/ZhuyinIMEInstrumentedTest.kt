@@ -45,7 +45,8 @@ class ZhuyinIMEInstrumentedTest {
 
     @Test
     fun testCreateWordDictionary() {
-        val dictionary: ZhuyinDictionary = zhuyinIME.createWordDictionary(context) as ZhuyinDictionary
+        val dictionary: ZhuyinDictionary =
+            zhuyinIME.createWordDictionary(context) as ZhuyinDictionary
         var words: String
         assertNotNull(dictionary)
         words = dictionary.getWords("ㄇㄠ")
@@ -53,5 +54,15 @@ class ZhuyinIMEInstrumentedTest {
         words = dictionary.getWords("ㄉㄠ")
         assert(words.contains("刀"))
         assert(words.contains("叨"))
+    }
+
+    @Test
+    fun testPhraseDictionary() {
+        val phraseDictionary = PhraseDictionary(context)
+        assert(phraseDictionary is PhraseDictionary)
+        val followingWords = phraseDictionary.getFollowingWords('綠')
+        assert(followingWords.contains('色'))
+        assert(followingWords.contains('林'))
+        assertFalse(followingWords.contains('貓'))
     }
 }
