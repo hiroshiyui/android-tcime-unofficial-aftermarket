@@ -2,6 +2,8 @@ package com.googlecode.tcime.unofficial.aftermarket
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.view.inputmethod.InputConnection
+import org.junit.Assert
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
@@ -17,6 +19,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class ZhuyinIMELocalTest {
     private var sharedPrefs: SharedPreferences = mock(SharedPreferences::class.java)
     private var context: Context = mock(Context::class.java)
+    private var inputConnection: InputConnection = mock(InputConnection::class.java)
 
     @Before
     fun before() {
@@ -34,5 +37,19 @@ class ZhuyinIMELocalTest {
         val currentKeyboard = keyboardSwitch.currentKeyboard as SoftKeyboard
         assertNotNull(currentKeyboard)
         assert(currentKeyboard.isEnglish)
+    }
+
+    @Test
+    fun testCreateEditor() {
+        val classUnderTest = ZhuyinIME()
+        val editor: ZhuyinEditor = classUnderTest.createEditor() as ZhuyinEditor
+        assertNotNull(editor)
+        editor.composingText = StringBuilder("綠茶")
+        Assert.assertTrue(editor.hasComposingText())
+        val composingText = editor.composingText().toString()
+        Assert.assertEquals("綠茶", composingText)
+
+        editor.clearComposingText(inputConnection)
+        Assert.assertFalse(editor.hasComposingText())
     }
 }

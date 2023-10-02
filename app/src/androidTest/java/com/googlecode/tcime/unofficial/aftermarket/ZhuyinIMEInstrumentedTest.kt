@@ -5,20 +5,41 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class ZhuyinIMEInstrumentedTest {
+    private lateinit var context: Context
+    private lateinit var zhuyinIME: ZhuyinIME
+
+    @Before
+    fun before() {
+        context = ApplicationProvider.getApplicationContext()
+        zhuyinIME = ZhuyinIME()
+    }
+
     @Test
     fun testCreateKeyboardSwitch() {
-        val context: Context = ApplicationProvider.getApplicationContext()
-        val zhuyinIME = ZhuyinIME()
         val keyboardSwitch = zhuyinIME.createKeyboardSwitch(context)
         keyboardSwitch.initializeKeyboard(960)
         val currentKeyboard = keyboardSwitch.currentKeyboard as SoftKeyboard
         assertNotNull(currentKeyboard)
         assertTrue(currentKeyboard.isEnglish)
+    }
+
+    @Test
+    fun testCreateEditor() {
+        val editor: ZhuyinEditor = zhuyinIME.createEditor() as ZhuyinEditor
+        assertNotNull(editor)
+        editor.composingText = StringBuilder("綠茶")
+        assertTrue(editor.hasComposingText())
+        val composingText = editor.composingText().toString()
+        assertEquals("綠茶", composingText)
+
+        editor.clearComposingText(zhuyinIME.currentInputConnection)
+        assertFalse(editor.hasComposingText())
     }
 }

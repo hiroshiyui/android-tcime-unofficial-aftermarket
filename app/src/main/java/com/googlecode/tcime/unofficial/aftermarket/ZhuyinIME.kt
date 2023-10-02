@@ -35,7 +35,7 @@ class ZhuyinIME : AbstractIME() {
         return KeyboardSwitch(context, Layout.ZHUYIN)
     }
 
-    override fun createEditor(): Editor {
+    public override fun createEditor(): Editor {
         return ZhuyinEditor()
     }
 

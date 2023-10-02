@@ -23,7 +23,7 @@ import android.view.inputmethod.InputConnection
  * Updates the editing field and handles composing-text.
  */
 abstract class Editor {
-    protected var composingText = StringBuilder()
+    var composingText = StringBuilder()
     private var canCompose = false
     private var enterAsLineBreak = false
     fun composingText(): CharSequence {
