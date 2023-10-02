@@ -24,7 +24,7 @@ import android.inputmethodservice.Keyboard
 /**
  * A soft keyboard definition.
  */
-class SoftKeyboard(context: Context?, @JvmField val id: Int) : Keyboard(context, id) {
+class SoftKeyboard(context: Context?, @JvmField var id: Int) : Keyboard(context, id) {
     private lateinit var symbolKey: Key
     private lateinit var enterKey: Key
     private lateinit var enterIcon: Drawable

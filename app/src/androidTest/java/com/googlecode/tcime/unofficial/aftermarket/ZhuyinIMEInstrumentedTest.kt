@@ -28,6 +28,15 @@ class ZhuyinIMEInstrumentedTest {
         val currentKeyboard = keyboardSwitch.currentKeyboard as SoftKeyboard
         assertNotNull(currentKeyboard)
         assertTrue(currentKeyboard.isEnglish)
+
+        // switch to Bopomofo keyboard
+        currentKeyboard.id = R.xml.zhuyin
+        assertTrue(currentKeyboard.isZhuyin)
+        assertTrue(currentKeyboard.isChinese)
+
+        // switch to QWERTY English keyboard
+        currentKeyboard.id = R.xml.qwerty
+        assertTrue(currentKeyboard.isEnglish)
     }
 
     @Test
