@@ -42,4 +42,16 @@ class ZhuyinIMEInstrumentedTest {
         editor.clearComposingText(zhuyinIME.currentInputConnection)
         assertFalse(editor.hasComposingText())
     }
+
+    @Test
+    fun testCreateWordDictionary() {
+        val dictionary: ZhuyinDictionary = zhuyinIME.createWordDictionary(context) as ZhuyinDictionary
+        var words: String
+        assertNotNull(dictionary)
+        words = dictionary.getWords("ㄇㄠ")
+        assertEquals("貓", words)
+        words = dictionary.getWords("ㄉㄠ")
+        assert(words.contains("刀"))
+        assert(words.contains("叨"))
+    }
 }

@@ -39,7 +39,7 @@ class ZhuyinIME : AbstractIME() {
         return ZhuyinEditor()
     }
 
-    override fun createWordDictionary(context: Context): WordDictionary {
+    public override fun createWordDictionary(context: Context): WordDictionary {
         return ZhuyinDictionary(context)
     }
 

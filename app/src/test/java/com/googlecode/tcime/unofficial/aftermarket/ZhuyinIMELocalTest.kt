@@ -2,6 +2,7 @@ package com.googlecode.tcime.unofficial.aftermarket
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Resources
 import android.view.inputmethod.InputConnection
 import org.junit.Assert
 import org.junit.Assert.assertNotNull
@@ -20,12 +21,15 @@ class ZhuyinIMELocalTest {
     private var sharedPrefs: SharedPreferences = mock(SharedPreferences::class.java)
     private var context: Context = mock(Context::class.java)
     private var inputConnection: InputConnection = mock(InputConnection::class.java)
+    private var resources: Resources = mock(Resources::class.java)
 
     @Before
     fun before() {
         this.sharedPrefs = mock(SharedPreferences::class.java)
         this.context = mock(Context::class.java)
+        this.resources = mock(Resources::class.java)
         Mockito.`when`(context.getSharedPreferences(anyString(), anyInt())).thenReturn(sharedPrefs)
+        Mockito.`when`(context.resources).thenReturn(resources)
     }
 
     @Test
