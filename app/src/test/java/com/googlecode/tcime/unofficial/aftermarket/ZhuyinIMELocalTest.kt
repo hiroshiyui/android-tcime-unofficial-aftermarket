@@ -27,9 +27,7 @@ class ZhuyinIMELocalTest {
     fun before() {
         this.sharedPrefs = mock(SharedPreferences::class.java)
         this.context = mock(Context::class.java)
-        this.resources = mock(Resources::class.java)
         Mockito.`when`(context.getSharedPreferences(anyString(), anyInt())).thenReturn(sharedPrefs)
-        Mockito.`when`(context.resources).thenReturn(resources)
     }
 
     @Test
@@ -55,5 +53,10 @@ class ZhuyinIMELocalTest {
 
         editor.clearComposingText(inputConnection)
         Assert.assertFalse(editor.hasComposingText())
+    }
+
+    @Test
+    fun testCreateWordDictionary() {
+        TODO("Doesn't found a clear way to mock ZhuyinDictionary object")
     }
 }
