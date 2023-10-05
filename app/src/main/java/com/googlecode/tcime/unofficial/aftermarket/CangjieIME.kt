@@ -29,16 +29,16 @@ class CangjieIME : AbstractIME() {
     private lateinit var keyMapping: HashMap<Int, Int>
     private lateinit var cangjieEditor: CangjieEditor
     private lateinit var cangjieDictionary: CangjieDictionary
-    override fun createKeyboardSwitch(context: Context): KeyboardSwitch {
+    public override fun createKeyboardSwitch(context: Context): KeyboardSwitch {
         return KeyboardSwitch(context, Layout.CANGJIE)
     }
 
-    override fun createEditor(): Editor {
+    public override fun createEditor(): Editor {
         cangjieEditor = CangjieEditor()
         return cangjieEditor
     }
 
-    override fun createWordDictionary(context: Context): WordDictionary {
+    public override fun createWordDictionary(context: Context): WordDictionary {
         cangjieDictionary = CangjieDictionary(context)
         return cangjieDictionary
     }
