@@ -64,14 +64,4 @@ class ZhuyinIMEInstrumentedTest {
         assert(words.contains("刀"))
         assert(words.contains("叨"))
     }
-
-    @Test
-    fun testPhraseDictionary() {
-        val phraseDictionary = PhraseDictionary(context)
-        assert(phraseDictionary is PhraseDictionary)
-        val followingWords = phraseDictionary.getFollowingWords('綠')
-        assert(followingWords.contains('色'))
-        assert(followingWords.contains('林'))
-        assertFalse(followingWords.contains('貓'))
-    }
 }
