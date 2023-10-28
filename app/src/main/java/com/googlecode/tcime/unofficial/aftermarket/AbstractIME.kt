@@ -60,6 +60,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     protected abstract fun createEditor(): Editor
     protected abstract fun createWordDictionary(context: Context): WordDictionary
     override fun onCreate() {
+        Log.d(this.javaClass.simpleName, "onCreate()")
         super.onCreate()
         keyboardSwitch = createKeyboardSwitch(this)
         editor = createEditor()
@@ -93,12 +94,14 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onDestroy() {
+        Log.d(this.javaClass.simpleName, "onDestroy()")
         phraseDictionary.close()
         unregisterReceiver(txtReceiver)
         super.onDestroy()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
+        Log.d(this.javaClass.simpleName, "onConfigurationChanged()")
         if (orientation != newConfig.orientation) {
             // Clear composing text and candidates for orientation change.
             escape()
@@ -112,6 +115,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
         oldSelStart: Int, oldSelEnd: Int, newSelStart: Int,
         newSelEnd: Int, candidatesStart: Int, candidatesEnd: Int
     ) {
+        Log.d(this.javaClass.simpleName, "onUpdateSelection()")
         super.onUpdateSelection(
             oldSelStart, oldSelEnd, newSelStart, newSelEnd,
             candidatesStart, candidatesEnd
@@ -127,11 +131,13 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onComputeInsets(outInsets: Insets) {
+        Log.d(this.javaClass.simpleName, "onComputeInsets()")
         super.onComputeInsets(outInsets)
         outInsets.contentTopInsets = outInsets.visibleTopInsets
     }
 
     override fun onCreateInputView(): View {
+        Log.d(this.javaClass.simpleName, "onCreateInputView()")
         softKeyboardViewLayoutBinding = SoftKeyboardViewLayoutBinding.inflate(layoutInflater)
         inputView = softKeyboardViewLayoutBinding.root
         inputView.setOnKeyboardActionListener(this)
@@ -139,6 +145,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onStartInput(attribute: EditorInfo, restarting: Boolean) {
+        Log.d(this.javaClass.simpleName, "onStartInput()")
         super.onStartInput(attribute, restarting)
         // Android 13 compatibility
         // ref: https://github.com/klausw/hackerskeyboard/commit/c504b79f3783cbf1f6228014fdd0bad288ad0d2c
@@ -146,6 +153,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onCreateCandidatesView(): View {
+        Log.d(this.javaClass.simpleName, "onCreateCandidatesView()")
         candidatesContainerLayoutBinding = CandidatesContainerLayoutBinding.inflate(layoutInflater)
         candidatesContainer = candidatesContainerLayoutBinding.root
         candidatesContainer.apply {
@@ -164,6 +172,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onStartInputView(attribute: EditorInfo, restarting: Boolean) {
+        Log.d(this.javaClass.simpleName, "onStartInputView()")
         super.onStartInputView(attribute, restarting)
 
         // Reset editor and candidates when the input-view is just being started.
@@ -177,6 +186,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onFinishInput() {
+        Log.d(this.javaClass.simpleName, "onFinishInput()")
         // Clear composing as any active composing text will be finished, same as in
         // onFinishInputView, onFinishCandidatesView, and onUnbindInput.
         editor.clearComposingText(currentInputConnection)
@@ -184,6 +194,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onFinishInputView(finishingInput: Boolean) {
+        Log.d(this.javaClass.simpleName, "onFinishInputView()")
         editor.clearComposingText(currentInputConnection)
         super.onFinishInputView(finishingInput)
         // Dismiss any pop-ups when the input-view is being finished and hidden.
@@ -191,11 +202,13 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onFinishCandidatesView(finishingInput: Boolean) {
+        Log.d(this.javaClass.simpleName, "onFinishCandidatesView()")
         editor.clearComposingText(currentInputConnection)
         super.onFinishCandidatesView(finishingInput)
     }
 
     override fun onBindInput() {
+        Log.d(this.javaClass.simpleName, "onBindInput()")
         // If we have textGot, commit it now.
         // This is the workaround solution to call commitText() successfully.
         super.onBindInput()
@@ -207,17 +220,20 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onUnbindInput() {
+        Log.d(this.javaClass.simpleName, "onUnbindInput()")
         editor.clearComposingText(currentInputConnection)
         super.onUnbindInput()
     }
 
     private fun bindKeyboardToInputView() {
+        Log.d(this.javaClass.simpleName, "bindKeyboardToInputView()")
         // Bind the selected keyboard to the input view.
         inputView.keyboard = keyboardSwitch.currentKeyboard
         updateCursorCapsToInputView()
     }
 
     private fun updateCursorCapsToInputView() {
+        Log.d(this.javaClass.simpleName, "updateCursorCapsToInputView()")
         val ic = currentInputConnection
         if (ic != null) {
             var caps = 0
@@ -230,6 +246,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     private fun commitText(text: CharSequence?) {
+        Log.d(this.javaClass.simpleName, "commitText()")
         text?.let {
             if (editor.commitText(currentInputConnection, it)) {
                 // Clear candidates after committing any text.
@@ -239,10 +256,18 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onKeyDown(keyCodeParam: Int, event: KeyEvent): Boolean {
+        Log.d(this.javaClass.simpleName, "onKeyDown()")
         if (keyCodeParam == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
             // Handle the back-key to close the pop-up keyboards.
+            Log.d(this.javaClass.simpleName, "onKeyDown(): KEYCODE_BACK")
             if (inputView.handleBack()) {
                 return true
+            }
+
+            // If input view had been dismissed, then skip BACK key interrupting
+            // (make BACK key do behave as-is)
+            if (!isInputViewShown) {
+                return false
             }
         }
         // Handle DPAD
@@ -256,6 +281,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onKey(primaryCode: Int, keyCodes: IntArray?) {
+        Log.d(this.javaClass.simpleName, "onKey()")
         if (keyboardSwitch.onKey(primaryCode)) {
             escape()
             bindKeyboardToInputView()
@@ -271,10 +297,12 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onText(text: CharSequence) {
+        Log.d(this.javaClass.simpleName, "onText()")
         commitText(text)
     }
 
     override fun onPress(primaryCode: Int) {
+        Log.d(this.javaClass.simpleName, "onPress()")
         effect.vibrate()
         effect.playSound()
     }
@@ -300,6 +328,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     override fun onPickCandidate(candidate: String?) {
+        Log.d(this.javaClass.simpleName, "onPickCandidate()")
         // Commit the picked candidate and suggest its following words.
         candidate?.apply {
             commitText(this)
@@ -310,10 +339,12 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     private fun clearCandidates() {
+        Log.d(this.javaClass.simpleName, "clearCandidates()")
         setCandidates("", false)
     }
 
     private fun setCandidates(words: String?, highlightDefault: Boolean) {
+        Log.d(this.javaClass.simpleName, "setCandidates()")
         words?.apply {
             setCandidatesViewShown(this.isNotEmpty() || editor.hasComposingText())
             candidatesContainer.setCandidates(this, highlightDefault)
@@ -322,6 +353,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     private fun handleOption(keyCode: Int): Boolean {
+        Log.d(this.javaClass.simpleName, "handleOption()")
         if (keyCode == SoftKeyboard.KEYCODE_OPTIONS) {
             // Create a Dialog menu
             val builder = AlertDialog.Builder(this)
@@ -380,10 +412,12 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     private fun handleCapsLock(keyCode: Int): Boolean {
+        Log.d(this.javaClass.simpleName, "handleCapsLock()")
         return keyCode == Keyboard.KEYCODE_SHIFT && inputView.toggleCapsLock()
     }
 
     private fun handleEnter(keyCode: Int): Boolean {
+        Log.d(this.javaClass.simpleName, "handleEnter()")
         if (keyCode == '\n'.code) {
             if (inputView.hasEscape()) {
                 escape()
@@ -398,6 +432,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     private fun handleSpace(keyCode: Int): Boolean {
+        Log.d(this.javaClass.simpleName, "handleSpace()")
         if (keyCode == ' '.code) {
             if (candidatesContainer.isShown) {
                 // The space key could either pick the highlighted candidate or escape
@@ -416,6 +451,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     private fun handleDelete(keyCode: Int): Boolean {
+        Log.d(this.javaClass.simpleName, "handleDelete()")
+
         // Handle delete-key only when no composing text.
         if (keyCode == Keyboard.KEYCODE_DELETE && !editor.hasComposingText()) {
             if (inputView.hasEscape()) {
@@ -429,6 +466,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     private fun handleComposing(keyCode: Int): Boolean {
+        Log.d(this.javaClass.simpleName, "handleComposing()")
+
         if (editor.compose(currentInputConnection, keyCode)) {
             // Set the candidates for the updated composing-text and provide default
             // highlight for the word candidates.
@@ -439,6 +478,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     }
 
     private fun handleDPAD(keyCode: Int): Boolean {
+        Log.d(this.javaClass.simpleName, "handleDPAD()")
+
         // Handle DPAD keys only
         if (keyCode < KeyEvent.KEYCODE_DPAD_UP || keyCode > KeyEvent.KEYCODE_DPAD_CENTER) {
             return false
@@ -461,6 +502,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
      * other handling-methods.
      */
     private fun handleKey(keyCodeParam: Int) {
+        Log.d(this.javaClass.simpleName, "handleKey()")
+
         var keyCode = keyCodeParam
         if (isInputViewShown && inputView.isShifted) {
             keyCode = keyCode.toChar().uppercaseChar().code
@@ -472,6 +515,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
      * Simulates PC Esc-key function by clearing all composing-text or candidates.
      */
     protected fun escape() {
+        Log.d(this.javaClass.simpleName, "escape()")
+
         editor.clearComposingText(currentInputConnection)
         clearCandidates()
     }
@@ -480,6 +525,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
      * Clear the keyboard meta status
      */
     fun clearKeyboardMetaState() {
+        Log.d(this.javaClass.simpleName, "clearKeyboardMetaState()")
+
         val allMetaState = (KeyEvent.META_ALT_ON or KeyEvent.META_ALT_LEFT_ON
                 or KeyEvent.META_ALT_RIGHT_ON or KeyEvent.META_SHIFT_ON
                 or KeyEvent.META_SHIFT_LEFT_ON
@@ -491,6 +538,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
      * Set the status bar icon
      */
     override fun showStatusIcon(iconResId: Int) {
+        Log.d(this.javaClass.simpleName, "showStatusIcon()")
+
         if (hasHardKeyboard && isHardKeyboardShow) {
             super.showStatusIcon(iconResId)
         } else {
@@ -505,6 +554,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
      * @return true if hard keyboard can be used
      */
     fun checkHardKeyboardAvailable(softKeyboard: SoftKeyboard?): Boolean {
+        Log.d(this.javaClass.simpleName, "checkHardKeyboardAvailable()")
+
         // Hard keyboard is not showed
         if (!isHardKeyboardShow) return false
         if (softKeyboard == null) {
@@ -528,6 +579,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
      * @return true if handled
      */
     fun handleLanguageChange(keyCode: Int, event: KeyEvent): Boolean {
+        Log.d(this.javaClass.simpleName, "handleLanguageChange()")
+
         if (event.isShiftPressed && keyCode == KeyEvent.KEYCODE_SPACE || keyCode == 1000) { // 1000 is hard-coded by MS3
             // Clear all meta state
             clearKeyboardMetaState()
