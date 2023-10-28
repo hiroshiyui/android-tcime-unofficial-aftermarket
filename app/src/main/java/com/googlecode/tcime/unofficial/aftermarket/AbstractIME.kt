@@ -162,9 +162,6 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     override fun onStartInput(attribute: EditorInfo, restarting: Boolean) {
         Log.d(this.javaClass.simpleName, "onStartInput()")
         super.onStartInput(attribute, restarting)
-        // Android 13 compatibility
-        // ref: https://github.com/klausw/hackerskeyboard/commit/c504b79f3783cbf1f6228014fdd0bad288ad0d2c
-        super.setCandidatesViewShown(true)
     }
 
     override fun onCreateCandidatesView(): View {
@@ -186,6 +183,11 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
         return candidatesContainer
     }
 
+    override fun onInitializeInterface() {
+        super.onInitializeInterface()
+        Log.d(this.javaClass.simpleName, "onInitializeInterface()")
+    }
+
     override fun onStartInputView(attribute: EditorInfo, restarting: Boolean) {
         Log.d(this.javaClass.simpleName, "onStartInputView()")
         super.onStartInputView(attribute, restarting)
@@ -198,6 +200,12 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
         // Select a keyboard based on the input type of the editing field.
         keyboardSwitch.onStartInput(attribute.inputType)
         bindKeyboardToInputView()
+    }
+
+    override fun onEvaluateInputViewShown(): Boolean {
+        super.onEvaluateInputViewShown()
+        Log.d(this.javaClass.simpleName, "onEvaluateInputViewShown()")
+        return true
     }
 
     override fun onFinishInput() {
@@ -270,11 +278,21 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
 
     override fun onKeyDown(keyCodeParam: Int, event: KeyEvent): Boolean {
         Log.d(this.javaClass.simpleName, "onKeyDown()")
-        if (keyCodeParam == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
-            // Handle the back-key to close the pop-up keyboards.
+
+        if (!imeWindowVisible) {
+            Log.d(
+                this.javaClass.simpleName,
+                "IME window is invisible, disable interrupt onKeyDown() events."
+            )
+            return false
+        }
+
+        // KEYCODE_BACK is system navigation BACK key (either physical or virtual), not Backspace!
+        if (keyCodeParam == KeyEvent.KEYCODE_BACK) {
             Log.d(this.javaClass.simpleName, "onKeyDown(): KEYCODE_BACK")
             return super.onKeyDown(keyCodeParam, event)
         }
+
         // Handle DPAD
         if (candidatesContainer.isShown) {
             if (keyCodeParam >= KeyEvent.KEYCODE_DPAD_UP && keyCodeParam <= KeyEvent.KEYCODE_DPAD_CENTER) {
