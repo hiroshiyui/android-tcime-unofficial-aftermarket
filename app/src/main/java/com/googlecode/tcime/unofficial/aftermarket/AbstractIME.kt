@@ -73,6 +73,8 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
         hasHardKeyboard = conf.keyboard != Configuration.KEYBOARD_NOKEYS
         isHardKeyboardShow = conf.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO
 
+        backDisposition = BACK_DISPOSITION_DEFAULT
+
         // Create a BroadcastReceiver to catch the TEXT_GOT result
         txtReceiver = object : BroadcastReceiver() {
             override fun onReceive(arg0: Context, arg1: Intent) {
