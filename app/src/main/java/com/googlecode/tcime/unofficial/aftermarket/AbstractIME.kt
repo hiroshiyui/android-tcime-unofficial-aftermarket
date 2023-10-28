@@ -56,6 +56,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
     private var isHardKeyboardShow = false
     private var toastShowedCount = 0
     private var txtReceiver: BroadcastReceiver? = null
+    private var imeWindowVisible = false
     protected abstract fun createKeyboardSwitch(context: Context): KeyboardSwitch
     protected abstract fun createEditor(): Editor
     protected abstract fun createWordDictionary(context: Context): WordDictionary
@@ -109,6 +110,18 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
         }
         isHardKeyboardShow = newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO
         super.onConfigurationChanged(newConfig)
+    }
+
+    override fun onWindowHidden() {
+        Log.d(this.javaClass.simpleName, "onWindowHidden()")
+        super.onWindowHidden()
+        imeWindowVisible = false
+    }
+
+    override fun onWindowShown() {
+        Log.d(this.javaClass.simpleName, "onWindowShown()")
+        super.onWindowShown()
+        imeWindowVisible = true
     }
 
     override fun onUpdateSelection(
@@ -197,8 +210,6 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
         Log.d(this.javaClass.simpleName, "onFinishInputView()")
         editor.clearComposingText(currentInputConnection)
         super.onFinishInputView(finishingInput)
-        // Dismiss any pop-ups when the input-view is being finished and hidden.
-        inputView.closing()
     }
 
     override fun onFinishCandidatesView(finishingInput: Boolean) {
@@ -260,15 +271,7 @@ abstract class AbstractIME : InputMethodService(), OnKeyboardActionListener, Can
         if (keyCodeParam == KeyEvent.KEYCODE_BACK && event.repeatCount == 0) {
             // Handle the back-key to close the pop-up keyboards.
             Log.d(this.javaClass.simpleName, "onKeyDown(): KEYCODE_BACK")
-            if (inputView.handleBack()) {
-                return true
-            }
-
-            // If input view had been dismissed, then skip BACK key interrupting
-            // (make BACK key do behave as-is)
-            if (!isInputViewShown) {
-                return false
-            }
+            return super.onKeyDown(keyCodeParam, event)
         }
         // Handle DPAD
         if (candidatesContainer.isShown) {
