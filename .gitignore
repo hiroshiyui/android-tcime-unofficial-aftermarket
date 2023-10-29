@@ -5,3 +5,4 @@ app/debug/
 app/release/
 local.properties
 build/
+java_*.hprof
