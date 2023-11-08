@@ -20,7 +20,6 @@ import android.content.SharedPreferences
 import android.inputmethodservice.Keyboard
 import androidx.preference.PreferenceManager
 import android.text.InputType
-import com.googlecode.tcime.unofficial.aftermarket.widgets.KeyboardView
 
 /**
  * Switches between four input modes: two symbol modes (number-symbol and

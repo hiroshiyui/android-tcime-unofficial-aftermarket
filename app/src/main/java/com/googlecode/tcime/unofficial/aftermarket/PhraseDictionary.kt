@@ -29,16 +29,15 @@ import java.util.concurrent.CountDownLatch
  */
 class PhraseDictionary(private val mContext: Context) {
     private val loading = CountDownLatch(1)
-    private val loader: DictionaryLoader
+    private val loader: DictionaryLoader = DictionaryLoader(
+        mContext.resources.openRawResource(R.raw.dict_phrases),
+        APPROX_DICTIONARY_SIZE, loading
+    )
     private var mObserver: ContentObserver? = null
     private var mRequiresReload = true
     private val userDic: HashMap<Char, StringBuilder>
 
     init {
-        loader = DictionaryLoader(
-            mContext.resources.openRawResource(R.raw.dict_phrases),
-            APPROX_DICTIONARY_SIZE, loading
-        )
         Thread(loader).start()
         val cres = mContext.contentResolver
         cres.registerContentObserver(

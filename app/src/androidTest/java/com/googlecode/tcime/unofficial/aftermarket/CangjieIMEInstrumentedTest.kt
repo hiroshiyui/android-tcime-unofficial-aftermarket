@@ -56,9 +56,8 @@ class CangjieIMEInstrumentedTest {
     fun testCreateWordDictionary() {
         val dictionary: CangjieDictionary =
             cangjieIME.createWordDictionary(context) as CangjieDictionary
-        var words: String
         assertNotNull(dictionary)
-        words = dictionary.getWords("卜口")
+        var words: String = dictionary.getWords("卜口")
         assertEquals("占", words)
         words = dictionary.getWords("人大口")
         assert(words.contains("知"))

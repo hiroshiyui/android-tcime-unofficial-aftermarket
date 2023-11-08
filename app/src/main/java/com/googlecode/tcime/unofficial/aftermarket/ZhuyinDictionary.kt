@@ -33,7 +33,7 @@ class ZhuyinDictionary(context: Context) :
         // [22-initials * 39-finals] syllables array; each syllables entry points to
         // a char[] containing words for that syllables.
         val dictionary = dictionary()
-        val data = (dictionary[syllablesIndex]) ?: return ""
+        val data = (dictionary[syllablesIndex])
 
         // Counts of words for each tone are stored in the array beginning.
         var tone = ZhuyinTable.getTones(pair!![1][0])

@@ -56,9 +56,8 @@ class ZhuyinIMEInstrumentedTest {
     fun testCreateWordDictionary() {
         val dictionary: ZhuyinDictionary =
             zhuyinIME.createWordDictionary(context) as ZhuyinDictionary
-        var words: String
         assertNotNull(dictionary)
-        words = dictionary.getWords("ㄇㄠ")
+        var words: String = dictionary.getWords("ㄇㄠ")
         assertEquals("貓", words)
         words = dictionary.getWords("ㄉㄠ")
         assert(words.contains("刀"))

@@ -21,7 +21,6 @@ class ZhuyinIMELocalTest {
     private var sharedPrefs: SharedPreferences = mock(SharedPreferences::class.java)
     private var context: Context = mock(Context::class.java)
     private var inputConnection: InputConnection = mock(InputConnection::class.java)
-    private var resources: Resources = mock(Resources::class.java)
 
     @Before
     fun before() {

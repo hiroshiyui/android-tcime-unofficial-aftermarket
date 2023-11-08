@@ -1,9 +1,8 @@
-package com.googlecode.tcime.unofficial.aftermarket.widgets
+package com.googlecode.tcime.unofficial.aftermarket
 
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import com.googlecode.tcime.unofficial.aftermarket.R
 
 abstract class KeyboardView : LinearLayout {
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)

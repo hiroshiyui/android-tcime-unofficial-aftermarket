@@ -20,7 +20,7 @@ import android.content.res.Configuration
 import android.inputmethodservice.Keyboard
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
-import com.googlecode.tcime.unofficial.aftermarket.widgets.KeyboardView.Layout
+import com.googlecode.tcime.unofficial.aftermarket.KeyboardView.Layout
 
 /**
  * Cangjie input method.

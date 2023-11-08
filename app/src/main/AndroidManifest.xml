@@ -54,8 +54,7 @@
 
         <activity
             android:name="ImePreferenceActivity"
-            android:exported="true"
-            android:label="@string/ime_name">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

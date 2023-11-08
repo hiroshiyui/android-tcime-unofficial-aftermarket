@@ -17,16 +17,16 @@
 -->
 
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:keyWidth="10%p"
     android:horizontalGap="0px"
-    android:verticalGap="0px"
-    android:keyHeight="@dimen/key_height_5row">
+    android:keyWidth="10%p"
+    android:keyHeight="@dimen/key_height_5row"
+    android:verticalGap="0px">
 
     <Row>
         <Key
             android:codes="12549"
-            android:keyLabel="ㄅ"
-            android:keyEdgeFlags="left" />
+            android:keyEdgeFlags="left"
+            android:keyLabel="ㄅ" />
         <Key
             android:codes="12553"
             android:keyLabel="ㄉ" />
@@ -53,15 +53,15 @@
             android:keyLabel="ㄞ" />
         <Key
             android:codes="12578"
-            android:keyLabel="ㄢ"
-            android:keyEdgeFlags="right" />
+            android:keyEdgeFlags="right"
+            android:keyLabel="ㄢ" />
     </Row>
 
     <Row>
         <Key
             android:codes="12550"
-            android:keyLabel="ㄆ"
-            android:keyEdgeFlags="left" />
+            android:keyEdgeFlags="left"
+            android:keyLabel="ㄆ" />
         <Key
             android:codes="12554"
             android:keyLabel="ㄊ" />
@@ -88,15 +88,15 @@
             android:keyLabel="ㄟ" />
         <Key
             android:codes="12579"
-            android:keyLabel="ㄣ"
-            android:keyEdgeFlags="right" />
+            android:keyEdgeFlags="right"
+            android:keyLabel="ㄣ" />
     </Row>
 
     <Row>
         <Key
             android:codes="12551"
-            android:keyLabel="ㄇ"
-            android:keyEdgeFlags="left" />
+            android:keyEdgeFlags="left"
+            android:keyLabel="ㄇ" />
         <Key
             android:codes="12555"
             android:keyLabel="ㄋ" />
@@ -123,15 +123,15 @@
             android:keyLabel="ㄠ" />
         <Key
             android:codes="12580"
-            android:keyLabel="ㄤ"
-            android:keyEdgeFlags="right" />
+            android:keyEdgeFlags="right"
+            android:keyLabel="ㄤ" />
     </Row>
 
     <Row>
         <Key
             android:codes="12552"
-            android:keyLabel="ㄈ"
-            android:keyEdgeFlags="left" />
+            android:keyEdgeFlags="left"
+            android:keyLabel="ㄈ" />
         <Key
             android:codes="12556"
             android:keyLabel="ㄌ" />
@@ -158,51 +158,51 @@
             android:keyLabel="ㄡ" />
         <Key
             android:codes="12581"
-            android:keyLabel="ㄥ"
-            android:keyEdgeFlags="right" />
+            android:keyEdgeFlags="right"
+            android:keyLabel="ㄥ" />
     </Row>
 
     <Row
-        android:rowEdgeFlags="bottom"
-        android:keyHeight="@dimen/key_height_bottom_row">
+        android:keyHeight="@dimen/key_height_bottom_row"
+        android:rowEdgeFlags="bottom">
         <Key
             android:codes="-200"
-            android:keyLabel="@string/label_english"
-            android:keyWidth="14%p" />
+            android:keyWidth="14%p"
+            android:keyLabel="@string/label_english" />
         <Key
             android:codes="-2"
-            android:keyLabel="123"
-            android:keyWidth="14%p"
+            android:isModifier="false"
             android:isSticky="true"
-            android:isModifier="false" />
+            android:keyWidth="14%p"
+            android:keyLabel="123" />
         <!-- 65292 = Full-width Comma -->
         <Key
             android:codes="65292"
+            android:iconPreview="@drawable/comma_popup_icon"
             android:keyWidth="12%p"
             android:keyLabel="，"
-            android:iconPreview="@drawable/comma_popup_icon"
             android:popupKeyboard="@xml/popup_punctuation_ch" />
         <Key
             android:codes="32"
-            android:keyIcon="@drawable/space_icon"
             android:iconPreview="@drawable/space_popup_icon"
+            android:isRepeatable="true"
             android:keyWidth="20%p"
-            android:isRepeatable="true" />
+            android:keyIcon="@drawable/space_icon" />
         <Key
             android:codes="12582"
             android:keyLabel="ㄦ" />
         <Key
             android:codes="-5"
-            android:keyIcon="@drawable/delete_icon"
             android:iconPreview="@drawable/delete_popup_icon"
+            android:isRepeatable="true"
             android:keyWidth="15%p"
-            android:isRepeatable="true" />
+            android:keyIcon="@drawable/delete_icon" />
         <Key
             android:codes="10"
-            android:keyIcon="@drawable/enter_icon"
             android:iconPreview="@drawable/enter_popup_icon"
             android:keyWidth="15%p"
-            android:keyEdgeFlags="right" />
+            android:keyEdgeFlags="right"
+            android:keyIcon="@drawable/enter_icon" />
     </Row>
 
 </Keyboard>
