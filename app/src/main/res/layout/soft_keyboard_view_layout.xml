@@ -21,4 +21,5 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:keyBackground="@drawable/key" />
+    android:keyBackground="@drawable/key"
+    android:keyPreviewLayout="@layout/key_preview_layout"/>
